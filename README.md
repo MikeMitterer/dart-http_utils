@@ -3,22 +3,23 @@ Over time this should become a collection of useful HTTP-Tools...
 * [API Reference][4]
 * [Issues][5]
 
-# URIBuilder #
-Helps you to compose URIs
+If the documenation links don't not work - pls. got to [GitHub][9] - there it they'll work
+
+## URIBuilder ##
+Helps you to compose URIs.<br>
 Dart Documentation fur URIBuilder is [here][6]
  
-For further documentation please refere to the [Unit-Tests][1].
+For further documentation please refere to the [Unit-Tests][1].<br>
 ApiDoc for Apaches [URIBuilder][3]
 
-# HTTPStatus #
+## HTTPStatus ##
 Brings status-code to a more readable form.
 Dart Documentation fur HTTPStatus is [here][7] 
 ([Unit-Tests][2])
 
 http_utils on [PUB][8]
 
-License
-========
+###License###
 
     Copyright 2012 Michael Mitterer, IT-Consulting and Development Limited,
     Austrian Branch
@@ -45,3 +46,4 @@ If this plugin is helpful for you - please [(Circle)](http://gplus.mikemitterer.
 [6]: http://htmlpreview.github.io/?https://raw.github.com/MikeMitterer/dart-http_utils/master/lib/docs/httputils/URIBuilder.html
 [7]: http://htmlpreview.github.io/?https://raw.github.com/MikeMitterer/dart-http_utils/master/lib/docs/httputils/HttpStatus.html
 [8]: http://pub.dartlang.org/packages/http_utils
+[9]: https://github.com/MikeMitterer/dart-http_utils
