@@ -19,28 +19,8 @@ part of httputils;
  *  limitations under the License.
  * ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the Apache Software Foundation.  For more
- * information on the Apache Software Foundation, please see
- * <http://www.apache.org/>.
- *
  */
 
-/*
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
-*/
-
-/**
- * @since 4.2
- */
 class URIBuilder {
 
     Map<String,String> queryParams = new Map<String,String>();

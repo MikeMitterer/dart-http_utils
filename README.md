@@ -1,8 +1,14 @@
-## URIBuilder ##
+Over time this should become a collection of useful HTTP-Tools...
+
+* [API Reference][4]
+* [Issues][5]
+
+# URIBuilder #
 Helps you to compose URIs
 For further documentation please refere to the [Unit-Tests][1].
+ApiDoc for Apaches [URIBuilder][3]
 
-## HTTPStatus ##
+# HTTPStatus #
 Brings status-code to a more readable form. ([Unit-Tests][2])
 
 License
@@ -27,4 +33,6 @@ If this plugin is helpful for you - please [(Circle)](http://gplus.mikemitterer.
 
 [1]: https://github.com/MikeMitterer/dart-http_utils/blob/master/test/src/uribuilder_test.dart
 [2]: https://github.com/MikeMitterer/dart-http_utils/blob/master/test/src/httpstatus_test.dart
-
+[3]: http://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/org/apache/http/client/utils/URIBuilder.html
+[4]: http://htmlpreview.github.io/?https://raw.github.com/MikeMitterer/dart-http_utils/master/lib/docs/httputils.html
+[5]: https://github.com/MikeMitterer/dart-http_utils/issues
