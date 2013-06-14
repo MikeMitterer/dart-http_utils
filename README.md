@@ -15,6 +15,7 @@ Brings status-code to a more readable form.
 Dart Documentation fur HTTPStatus is [here][7] 
 ([Unit-Tests][2])
 
+http_utils on [PUB][8]
 
 License
 ========
@@ -43,3 +44,4 @@ If this plugin is helpful for you - please [(Circle)](http://gplus.mikemitterer.
 [5]: https://github.com/MikeMitterer/dart-http_utils/issues
 [6]: http://htmlpreview.github.io/?https://raw.github.com/MikeMitterer/dart-http_utils/master/lib/docs/httputils/URIBuilder.html
 [7]: http://htmlpreview.github.io/?https://raw.github.com/MikeMitterer/dart-http_utils/master/lib/docs/httputils/HttpStatus.html
+[8]: http://pub.dartlang.org/packages/http_utils
