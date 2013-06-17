@@ -55,6 +55,25 @@ testURIBuilder() {
       expect(uribuilder.build().queryParameters["age"],"%3E20");
       expect(Uri.decodeQueryComponent(uribuilder.build().queryParameters["age"]),">20");
       expect(uribuilder.decode().queryParameters["age"],">20");
+      }); 
+    
+    test('> Path only', () {
+      URIBuilder uribuilder = new URIBuilder.fromString("/test /subfolder/file.html");
+      expect(uribuilder.build().path,"/test%20/subfolder/file.html");
+      expect(uribuilder.build(encode: false).path,"/test /subfolder/file.html");
+      
+      uribuilder = new URIBuilder.fromString("/?age=>20");
+      expect(uribuilder.build().path,"/");
+      expect(uribuilder.build().queryParameters["age"],"%3E20");
+      expect(Uri.decodeQueryComponent(uribuilder.build().queryParameters["age"]),">20");
+      expect(uribuilder.decode().queryParameters["age"],">20");
+      
+      uribuilder = new URIBuilder.fromString("?age=%3E20");
+      expect(uribuilder.build().queryParameters["age"],"%3E20");
+      expect(Uri.decodeQueryComponent(uribuilder.build().queryParameters["age"]),">20");
+      expect(uribuilder.decode().queryParameters["age"],">20");
+      
+      expect('',uribuilder.build().host);
       });        
   });
 }
