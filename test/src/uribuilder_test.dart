@@ -74,7 +74,13 @@ testURIBuilder() {
       expect(uribuilder.decode().queryParameters["age"],">20");
       
       expect('',uribuilder.build().host);
-      });        
+      });   
+    
+    test('> isEmpty', () {
+      URIBuilder uribuilder = new URIBuilder.fromString("/test/subfolder/file.html");
+      expect(uribuilder.isNotEmpty,isTrue);
+      });    
+    
   });
 }
 

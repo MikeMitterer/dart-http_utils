@@ -66,6 +66,12 @@ class URIBuilder {
       return Uri.parse(Uri.decodeFull(build().toString()));
     }
     
+    /// checks if the path is empty
+    bool get isEmpty => _path.isEmpty;
+    
+    /// checks if the path is not empty
+    bool get isNotEmpty => _path.isNotEmpty;
+    
     /**
      * Sets Uri scheme.
      */

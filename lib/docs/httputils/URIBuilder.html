@@ -85,6 +85,12 @@ class URIBuilder {
      return Uri.parse(Uri.decodeFull(build().toString()));
    }
    
+   /// checks if the path is empty
+   bool get isEmpty =&gt; _path.isEmpty;
+   
+   /// checks if the path is not empty
+   bool get isNotEmpty =&gt; _path.isNotEmpty;
+   
    /**
     * Sets Uri scheme.
     */
@@ -231,6 +237,32 @@ URIBuilder.fromUri(final Uri uri) {
 </div>
 <div>
 <h3>Properties</h3>
+<div class="field"><h4 id="isEmpty">
+<button class="show-code">Code</button>
+final <a href="http://api.dartlang.org/dart_core/bool.html">bool</a>         <strong>isEmpty</strong> <a class="anchor-link"
+            href="#isEmpty"
+            title="Permalink to URIBuilder.isEmpty">#</a>
+        </h4>
+        <div class="doc">
+<p>checks if the path is empty</p>
+<pre class="source">
+bool get isEmpty =&gt; _path.isEmpty;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="isNotEmpty">
+<button class="show-code">Code</button>
+final <a href="http://api.dartlang.org/dart_core/bool.html">bool</a>         <strong>isNotEmpty</strong> <a class="anchor-link"
+            href="#isNotEmpty"
+            title="Permalink to URIBuilder.isNotEmpty">#</a>
+        </h4>
+        <div class="doc">
+<p>checks if the path is not empty</p>
+<pre class="source">
+bool get isNotEmpty =&gt; _path.isNotEmpty;
+</pre>
+</div>
+</div>
 <div class="field"><h4 id="port">
 <button class="show-code">Code</button>
 <a href="http://api.dartlang.org/dart_core/int.html">int</a>         <strong>port</strong> <a class="anchor-link"
@@ -423,7 +455,7 @@ URIBuilder setUserInfo(final String username, final String password) {
         <div class="clear"></div>
         </div>
         <div class="footer">
-          <div>This page was generated at 2013-06-14 19:26:33.734</div>
+          <div>This page was generated at 2013-06-21 09:47:11.925</div>
         </div>
         <script async src="../client-static.js"></script>
         </body></html>
