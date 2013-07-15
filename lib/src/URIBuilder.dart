@@ -49,6 +49,10 @@ class URIBuilder {
     /**
      * Build a URI, using the supplied values in order to replace any URI template parameters. 
      * Values are converted to String using their toString function
+     * 
+     *     URIBuilder uribuilder = new URIBuilder.fromString("/test/{folder}/file.html");
+     *     Uri uri = uribuilder.build(values: { "folder":"sub"});
+     *     expect(uri.path,"/test/sub/file.html");
      */
     Uri build({final Map<String,dynamic> values: const {},final bool encode: true}) {
       if(values.length > 0) { _replacePathWithValues(values); }

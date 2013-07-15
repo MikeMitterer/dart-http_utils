@@ -24,13 +24,6 @@
       
         <div class="nav">
         
-<h2><div class="icon-library"></div><a href="../httputils.html">httputils</a></h2><ul class="icon">
-<li><a href="../httputils/BasicNameValuePair.html"><div class="icon-class"></div>BasicNameValuePair</a></li>
-<li><a href="../httputils/HttpStatus.html"><div class="icon-class"></div>HttpStatus</a></li>
-<li><a href="../httputils/NameValuePair.html"><div class="icon-class"></div>NameValuePair</a></li>
-<li><div class="icon-class"></div><strong>URIBuilder</strong></li>
-<li><a href="../httputils/URISyntaxException.html"><div class="icon-exception"></div>URISyntaxException</a></li>
-</ul>
 </div>
 <div class="content">
         <h2><strong>URIBuilder</strong>
@@ -66,9 +59,15 @@ class URIBuilder {
 
    
    /**
-    * Builds a Uri instance.
+    * Build a URI, using the supplied values in order to replace any URI template parameters. 
+    * Values are converted to String using their toString function
+    * 
+    *     URIBuilder uribuilder = new URIBuilder.fromString("/test/{folder}/file.html");
+    *     Uri uri = uribuilder.build(values: { "folder":"sub"});
+    *     expect(uri.path,"/test/sub/file.html");
     */
-   Uri build({final bool encode: true}) {
+   Uri build({final Map&lt;String,dynamic&gt; values: const {},final bool encode: true}) {
+     if(values.length &gt; 0) { _replacePathWithValues(values); }
      final Uri uri = new Uri(
          scheme: _scheme,
          userInfo: _userInfo,
@@ -192,7 +191,13 @@ class URIBuilder {
        this._fragment = uri.fragment;
        
        this.queryParams = new Map&lt;String,String&gt;.from(uri.queryParameters);
-   }    
+   } 
+   
+   void _replacePathWithValues(final Map&lt;String,dynamic&gt; values) {
+     for(final String key in values.keys) {
+       _path = _path.replaceAll("\{$key\}", values[key].toString());      
+     }
+   }
 }
 </pre>
 </div>
@@ -212,7 +217,7 @@ URIBuilder() {
 </div>
 <div class="method"><h4 id="URIBuilder.fromString">
 <button class="show-code">Code</button>
-new <strong>URIBuilder.fromString</strong>(<a href="http://api.dartlang.org/dart_core/String.html">String</a> string) <a class="anchor-link" href="#URIBuilder.fromString"
+new <strong>URIBuilder.fromString</strong>(String string) <a class="anchor-link" href="#URIBuilder.fromString"
               title="Permalink to URIBuilder.URIBuilder.fromString">#</a></h4>
 <div class="doc">
 <pre class="source">
@@ -224,7 +229,7 @@ URIBuilder.fromString(final String string) {
 </div>
 <div class="method"><h4 id="URIBuilder.fromUri">
 <button class="show-code">Code</button>
-new <strong>URIBuilder.fromUri</strong>(<a href="http://api.dartlang.org/dart_core/Uri.html">Uri</a> uri) <a class="anchor-link" href="#URIBuilder.fromUri"
+new <strong>URIBuilder.fromUri</strong>(Uri uri) <a class="anchor-link" href="#URIBuilder.fromUri"
               title="Permalink to URIBuilder.URIBuilder.fromUri">#</a></h4>
 <div class="doc">
 <pre class="source">
@@ -239,7 +244,7 @@ URIBuilder.fromUri(final Uri uri) {
 <h3>Properties</h3>
 <div class="field"><h4 id="isEmpty">
 <button class="show-code">Code</button>
-final <a href="http://api.dartlang.org/dart_core/bool.html">bool</a>         <strong>isEmpty</strong> <a class="anchor-link"
+final bool         <strong>isEmpty</strong> <a class="anchor-link"
             href="#isEmpty"
             title="Permalink to URIBuilder.isEmpty">#</a>
         </h4>
@@ -252,7 +257,7 @@ bool get isEmpty =&gt; _path.isEmpty;
 </div>
 <div class="field"><h4 id="isNotEmpty">
 <button class="show-code">Code</button>
-final <a href="http://api.dartlang.org/dart_core/bool.html">bool</a>         <strong>isNotEmpty</strong> <a class="anchor-link"
+final bool         <strong>isNotEmpty</strong> <a class="anchor-link"
             href="#isNotEmpty"
             title="Permalink to URIBuilder.isNotEmpty">#</a>
         </h4>
@@ -265,7 +270,7 @@ bool get isNotEmpty =&gt; _path.isNotEmpty;
 </div>
 <div class="field"><h4 id="port">
 <button class="show-code">Code</button>
-<a href="http://api.dartlang.org/dart_core/int.html">int</a>         <strong>port</strong> <a class="anchor-link"
+int         <strong>port</strong> <a class="anchor-link"
             href="#port"
             title="Permalink to URIBuilder.port">#</a>
         </h4>
@@ -277,7 +282,7 @@ int port = 0
 </div>
 <div class="field"><h4 id="queryParams">
 <button class="show-code">Code</button>
-<a href="http://api.dartlang.org/dart_core/Map.html">Map</a>&lt;<a href="http://api.dartlang.org/dart_core/String.html">String</a>, <a href="http://api.dartlang.org/dart_core/String.html">String</a>&gt;         <strong>queryParams</strong> <a class="anchor-link"
+Map&lt;String, String&gt;         <strong>queryParams</strong> <a class="anchor-link"
             href="#queryParams"
             title="Permalink to URIBuilder.queryParams">#</a>
         </h4>
@@ -292,12 +297,18 @@ Map&lt;String,String&gt; queryParams = new Map&lt;String,String&gt;()
 <h3>Methods</h3>
 <div class="method"><h4 id="build">
 <button class="show-code">Code</button>
-<a href="http://api.dartlang.org/dart_core/Uri.html">Uri</a> <strong>build</strong>({<a href="http://api.dartlang.org/dart_core/bool.html">bool</a> encode: true}) <a class="anchor-link" href="#build"
+Uri <strong>build</strong>({Map&lt;String, dynamic&gt; values: const{}, bool encode: true}) <a class="anchor-link" href="#build"
               title="Permalink to URIBuilder.build">#</a></h4>
 <div class="doc">
-<p>Builds a Uri instance.</p>
+<p>Build a URI, using the supplied values in order to replace any URI template parameters. 
+Values are converted to String using their toString function</p>
+<pre><code>URIBuilder uribuilder = new URIBuilder.fromString("/test/{folder}/file.html");
+Uri uri = uribuilder.build(values: { "folder":"sub"});
+expect(uri.path,"/test/sub/file.html");
+</code></pre>
 <pre class="source">
-Uri build({final bool encode: true}) {
+Uri build({final Map&lt;String,dynamic&gt; values: const {},final bool encode: true}) {
+ if(values.length &gt; 0) { _replacePathWithValues(values); }
  final Uri uri = new Uri(
      scheme: _scheme,
      userInfo: _userInfo,
@@ -314,7 +325,7 @@ Uri build({final bool encode: true}) {
 </div>
 <div class="method"><h4 id="decode">
 <button class="show-code">Code</button>
-<a href="http://api.dartlang.org/dart_core/Uri.html">Uri</a> <strong>decode</strong>() <a class="anchor-link" href="#decode"
+Uri <strong>decode</strong>() <a class="anchor-link" href="#decode"
               title="Permalink to URIBuilder.decode">#</a></h4>
 <div class="doc">
 <pre class="source">
@@ -340,7 +351,7 @@ URIBuilder removeQuery() {
 </div>
 <div class="method"><h4 id="setFragment">
 <button class="show-code">Code</button>
-<a href="../httputils/URIBuilder.html">URIBuilder</a> <strong>setFragment</strong>(<a href="http://api.dartlang.org/dart_core/String.html">String</a> fragment) <a class="anchor-link" href="#setFragment"
+<a href="../httputils/URIBuilder.html">URIBuilder</a> <strong>setFragment</strong>(String fragment) <a class="anchor-link" href="#setFragment"
               title="Permalink to URIBuilder.setFragment">#</a></h4>
 <div class="doc">
 <p>Sets Uri fragment.</p>
@@ -354,7 +365,7 @@ URIBuilder setFragment(final String fragment) {
 </div>
 <div class="method"><h4 id="setHost">
 <button class="show-code">Code</button>
-<a href="../httputils/URIBuilder.html">URIBuilder</a> <strong>setHost</strong>(<a href="http://api.dartlang.org/dart_core/String.html">String</a> host) <a class="anchor-link" href="#setHost"
+<a href="../httputils/URIBuilder.html">URIBuilder</a> <strong>setHost</strong>(String host) <a class="anchor-link" href="#setHost"
               title="Permalink to URIBuilder.setHost">#</a></h4>
 <div class="doc">
 <p>Sets Uri host.</p>
@@ -368,7 +379,7 @@ URIBuilder setHost(final String host) {
 </div>
 <div class="method"><h4 id="setParameter">
 <button class="show-code">Code</button>
-<a href="../httputils/URIBuilder.html">URIBuilder</a> <strong>setParameter</strong>(<a href="http://api.dartlang.org/dart_core/String.html">String</a> name, <a href="http://api.dartlang.org/dart_core/String.html">String</a> value) <a class="anchor-link" href="#setParameter"
+<a href="../httputils/URIBuilder.html">URIBuilder</a> <strong>setParameter</strong>(String name, String value) <a class="anchor-link" href="#setParameter"
               title="Permalink to URIBuilder.setParameter">#</a></h4>
 <div class="doc">
 <p>Sets parameter-value pair to Uri query removing existing parameters with the same name.</p>
@@ -382,7 +393,7 @@ URIBuilder setParameter(final String name, final String value) {
 </div>
 <div class="method"><h4 id="setPath">
 <button class="show-code">Code</button>
-<a href="../httputils/URIBuilder.html">URIBuilder</a> <strong>setPath</strong>(<a href="http://api.dartlang.org/dart_core/String.html">String</a> path) <a class="anchor-link" href="#setPath"
+<a href="../httputils/URIBuilder.html">URIBuilder</a> <strong>setPath</strong>(String path) <a class="anchor-link" href="#setPath"
               title="Permalink to URIBuilder.setPath">#</a></h4>
 <div class="doc">
 <p>Sets Uri path.</p>
@@ -396,7 +407,7 @@ URIBuilder setPath(final String path) {
 </div>
 <div class="method"><h4 id="setPort">
 <button class="show-code">Code</button>
-<a href="../httputils/URIBuilder.html">URIBuilder</a> <strong>setPort</strong>(<a href="http://api.dartlang.org/dart_core/int.html">int</a> port) <a class="anchor-link" href="#setPort"
+<a href="../httputils/URIBuilder.html">URIBuilder</a> <strong>setPort</strong>(int port) <a class="anchor-link" href="#setPort"
               title="Permalink to URIBuilder.setPort">#</a></h4>
 <div class="doc">
 <p>Sets Uri port.</p>
@@ -410,7 +421,7 @@ URIBuilder setPort(final int port) {
 </div>
 <div class="method"><h4 id="setQuery">
 <button class="show-code">Code</button>
-<a href="../httputils/URIBuilder.html">URIBuilder</a> <strong>setQuery</strong>(<a href="http://api.dartlang.org/dart_core/String.html">String</a> query) <a class="anchor-link" href="#setQuery"
+<a href="../httputils/URIBuilder.html">URIBuilder</a> <strong>setQuery</strong>(String query) <a class="anchor-link" href="#setQuery"
               title="Permalink to URIBuilder.setQuery">#</a></h4>
 <div class="doc">
 <p>Set Uri query.</p>
@@ -424,7 +435,7 @@ URIBuilder setQuery(final String query) {
 </div>
 <div class="method"><h4 id="setScheme">
 <button class="show-code">Code</button>
-<a href="../httputils/URIBuilder.html">URIBuilder</a> <strong>setScheme</strong>(<a href="http://api.dartlang.org/dart_core/String.html">String</a> scheme) <a class="anchor-link" href="#setScheme"
+<a href="../httputils/URIBuilder.html">URIBuilder</a> <strong>setScheme</strong>(String scheme) <a class="anchor-link" href="#setScheme"
               title="Permalink to URIBuilder.setScheme">#</a></h4>
 <div class="doc">
 <p>Sets Uri scheme.</p>
@@ -438,7 +449,7 @@ URIBuilder setScheme(final String scheme) {
 </div>
 <div class="method"><h4 id="setUserInfo">
 <button class="show-code">Code</button>
-<a href="../httputils/URIBuilder.html">URIBuilder</a> <strong>setUserInfo</strong>(<a href="http://api.dartlang.org/dart_core/String.html">String</a> username, <a href="http://api.dartlang.org/dart_core/String.html">String</a> password) <a class="anchor-link" href="#setUserInfo"
+<a href="../httputils/URIBuilder.html">URIBuilder</a> <strong>setUserInfo</strong>(String username, String password) <a class="anchor-link" href="#setUserInfo"
               title="Permalink to URIBuilder.setUserInfo">#</a></h4>
 <div class="doc">
 <p>Sets Uri user-info in a form of 'username:password'.</p>
@@ -455,8 +466,8 @@ URIBuilder setUserInfo(final String username, final String password) {
         <div class="clear"></div>
         </div>
         <div class="footer">
-          <div>This page was generated at 2013-06-21 09:47:11.925</div>
+          <div>This page was generated at 2013-07-15 15:41:33.976</div>
         </div>
-        <script async src="../client-static.js"></script>
+        <script async src="../client-live-nav.js"></script>
         </body></html>
         
