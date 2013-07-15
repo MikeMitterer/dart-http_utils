@@ -81,6 +81,16 @@ testURIBuilder() {
       expect(uribuilder.isNotEmpty,isTrue);
       });    
     
+    test('> replace path', () {
+      URIBuilder uribuilder = new URIBuilder.fromString("/test/{folder}/file.html");
+      Uri uri = uribuilder.build(values: { "folder":"sub"});
+      expect(uri.path,"/test/sub/file.html");
+      
+      URIBuilder resturi = new URIBuilder.fromString("/test/name/{id}");
+      Uri uri2 = resturi.build(values: { "id":"10"});
+      expect(uri2.path,"/test/name/10");
+      
+      });       
   });
 }
 

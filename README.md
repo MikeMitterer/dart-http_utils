@@ -19,9 +19,12 @@ Dart Documentation fur HTTPStatus is [here][7]
 
 http_utils on [PUB][8]
 
+###History###
+* 1.0.7 - "build" builds the Uri now with the supplied values. It replaces any URI template parameter with the values "toString" method
+
 ###License###
 
-    Copyright 2012 Michael Mitterer, IT-Consulting and Development Limited,
+    Copyright 2013 Michael Mitterer, IT-Consulting and Development Limited,
     Austrian Branch
 
     Licensed under the Apache License, Version 2.0 (the "License");

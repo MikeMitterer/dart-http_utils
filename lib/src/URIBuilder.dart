@@ -47,9 +47,11 @@ class URIBuilder {
 
     
     /**
-     * Builds a Uri instance.
+     * Build a URI, using the supplied values in order to replace any URI template parameters. 
+     * Values are converted to String using their toString function
      */
-    Uri build({final bool encode: true}) {
+    Uri build({final Map<String,dynamic> values: const {},final bool encode: true}) {
+      if(values.length > 0) { _replacePathWithValues(values); }
       final Uri uri = new Uri(
           scheme: _scheme,
           userInfo: _userInfo,
@@ -173,5 +175,11 @@ class URIBuilder {
         this._fragment = uri.fragment;
         
         this.queryParams = new Map<String,String>.from(uri.queryParameters);
-    }    
+    } 
+    
+    void _replacePathWithValues(final Map<String,dynamic> values) {
+      for(final String key in values.keys) {
+        _path = _path.replaceAll("\{$key\}", values[key].toString());      
+      }
+    }
 }
