@@ -5,6 +5,10 @@ class RestUrl8081 extends RestUrl {
   const RestUrl8081([final String scheme = "http"]) : super(scheme);
 }
 
+class RestBuilderForChat extends RestBuilder {
+  const RestBuilderForChat() : super("ws","","/chat");
+}
+
 testRestUrl() {
   group('RestUrl', () { 
     group('RestUrl - basics', () {
@@ -58,6 +62,10 @@ testRestUrl() {
         expect(resturl(),"https://localhost:8081/api/v1");
         });
       
+      test(' -> Chat URL', () {
+        const RestBuilder resturl = const RestBuilderForChat();
+        expect(resturl().setParameter("name","Mike").build().toString(),"ws://localhost:8080/chat?name=Mike");
+        });      
     
      }); // group RestUrl change default values
     
