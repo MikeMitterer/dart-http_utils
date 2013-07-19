@@ -9,6 +9,12 @@ class RestBuilderForChat extends RestBuilder {
   const RestBuilderForChat() : super("ws","","/chat");
 }
 
+class RestLocalFile extends RestBuilder {
+  String get port => ""; 
+  String get host => "";
+  const RestLocalFile() : super("","","data",".json");
+}
+
 testRestUrl() {
   group('RestUrl', () { 
     group('RestUrl - basics', () {
@@ -65,7 +71,12 @@ testRestUrl() {
       test(' -> Chat URL', () {
         const RestBuilder resturl = const RestBuilderForChat();
         expect(resturl().setParameter("name","Mike").build().toString(),"ws://localhost:8080/chat?name=Mike");
-        });      
+        });  
+      
+      test(' -> Loal file', () {
+        const RestBuilder resturl = const RestLocalFile();
+        expect(resturl("/colors").build().toString(),"data/colors.json");
+        });       
     
      }); // group RestUrl change default values
     

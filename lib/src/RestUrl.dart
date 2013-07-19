@@ -30,7 +30,14 @@ abstract class AbstractRestUrl {
   String _toString(final String path,final Map<String,dynamic> params) {
     final StringBuffer uri = new StringBuffer();
     
-    uri.write("$scheme://$authority");
+    if(scheme.isNotEmpty) {
+      uri.write("$scheme://");
+    }
+    
+    if(authority.isNotEmpty && authority.length > 1) {
+      uri.write("$authority");
+    }    
+    
     if(pathPrefix.isNotEmpty) {
       uri.write("$pathPrefix");
     }
