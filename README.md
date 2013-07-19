@@ -20,6 +20,7 @@ Dart Documentation fur HTTPStatus is [here][7]
 http_utils on [PUB][8]
 
 ###History###
+* 1.1.0 - RestUrl provides you with some default settings for your server and generats Urls, Uris or URIBuilder
 * 1.0.7 - "build" builds the Uri now with the supplied values. It replaces any URI template parameter with the values "toString" method
 
 ###License###
