@@ -6,7 +6,7 @@ Over time this should become a collection of useful HTTP-Tools...
 If the documenation links don't not work - pls. got to [GitHub][9] - there it they'll work
 
 ### ResponseStatus ###
-Commonly used status codes defined by HTTP
+Commonly used status codes defined by HTTP<br>
 Dart Documentation for ResponseStatus [here][10]
 
 ### URIBuilder ###
