@@ -1,0 +1,271 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>ResponseStatusFamily class / httputils Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="httputils" data-type="ResponseStatusFamily">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../httputils.html">httputils</a> &rsaquo; <a href="../httputils/ResponseStatusFamily.html">ResponseStatusFamily</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>ResponseStatusFamily</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<p>An constant representing the class of status code</p><a href="http://goo.gl/7p85Ff">JavaDoc</a>
+<pre class="source">
+class ResponseStatusFamily {
+ static final List&lt;ResponseStatusFamily&gt; _values = new List&lt;ResponseStatusFamily&gt;();
+ final String _name;
+ final int _value;
+ 
+ const ResponseStatusFamily(this._name,this._value);
+ 
+ static const ResponseStatusFamily COMMUNICATION_FAILED  = const ResponseStatusFamily("COMMUNICATION_FAILED",0);
+ static const ResponseStatusFamily INFORMATIONAL         = const ResponseStatusFamily("INFORMATIONAL",100);
+ static const ResponseStatusFamily SUCCESSFUL            = const ResponseStatusFamily("SUCCESSFUL",200);  
+ static const ResponseStatusFamily REDIRECTION           = const ResponseStatusFamily("REDIRECTION",300);
+ static const ResponseStatusFamily CLIENT_ERROR          = const ResponseStatusFamily("CLIENT_ERROR",400);
+ static const ResponseStatusFamily SERVER_ERROR          = const ResponseStatusFamily("SERVER_ERROR",500);
+
+ String get name =&gt; _name;
+ int get value =&gt; _value;
+ String toString() =&gt; _name;
+ 
+ /// Returns a List containing the constants of type, in the order they are declared.
+ static List&lt;ResponseStatusFamily&gt; values() {
+   if(_values.length == 0) {
+     _values.add(COMMUNICATION_FAILED);
+     _values.add(INFORMATIONAL);
+     _values.add(SUCCESSFUL);
+     _values.add(REDIRECTION);
+     _values.add(CLIENT_ERROR);
+     _values.add(SERVER_ERROR);
+   }
+   
+   return _values;
+ }
+ 
+ /// Returns the constant of this type with the specified name.
+ static ResponseStatusFamily valueOf(final String name) {
+   if(name == null || name.isEmpty) {
+     throw new ArgumentError("ResponseStatusFamily-name must not be null or empty");
+   }
+   
+   ResponseStatusFamily family = values().firstWhere((final ResponseStatusFamily element) =&gt; name.toUpperCase() == element.name);
+   
+   return family;
+ }
+}
+</pre>
+</div>
+<div>
+<h3>Static Properties</h3>
+<div class="field"><h4 id="CLIENT_ERROR">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatusFamily.html">ResponseStatusFamily</a>         <strong>CLIENT_ERROR</strong> <a class="anchor-link"
+            href="#CLIENT_ERROR"
+            title="Permalink to ResponseStatusFamily.CLIENT_ERROR">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+static const ResponseStatusFamily CLIENT_ERROR          = const ResponseStatusFamily("CLIENT_ERROR",400)
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="COMMUNICATION_FAILED">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatusFamily.html">ResponseStatusFamily</a>         <strong>COMMUNICATION_FAILED</strong> <a class="anchor-link"
+            href="#COMMUNICATION_FAILED"
+            title="Permalink to ResponseStatusFamily.COMMUNICATION_FAILED">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+static const ResponseStatusFamily COMMUNICATION_FAILED  = const ResponseStatusFamily("COMMUNICATION_FAILED",0)
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="INFORMATIONAL">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatusFamily.html">ResponseStatusFamily</a>         <strong>INFORMATIONAL</strong> <a class="anchor-link"
+            href="#INFORMATIONAL"
+            title="Permalink to ResponseStatusFamily.INFORMATIONAL">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+static const ResponseStatusFamily INFORMATIONAL         = const ResponseStatusFamily("INFORMATIONAL",100)
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="REDIRECTION">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatusFamily.html">ResponseStatusFamily</a>         <strong>REDIRECTION</strong> <a class="anchor-link"
+            href="#REDIRECTION"
+            title="Permalink to ResponseStatusFamily.REDIRECTION">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+static const ResponseStatusFamily REDIRECTION           = const ResponseStatusFamily("REDIRECTION",300)
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="SERVER_ERROR">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatusFamily.html">ResponseStatusFamily</a>         <strong>SERVER_ERROR</strong> <a class="anchor-link"
+            href="#SERVER_ERROR"
+            title="Permalink to ResponseStatusFamily.SERVER_ERROR">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+static const ResponseStatusFamily SERVER_ERROR          = const ResponseStatusFamily("SERVER_ERROR",500)
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="SUCCESSFUL">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatusFamily.html">ResponseStatusFamily</a>         <strong>SUCCESSFUL</strong> <a class="anchor-link"
+            href="#SUCCESSFUL"
+            title="Permalink to ResponseStatusFamily.SUCCESSFUL">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+static const ResponseStatusFamily SUCCESSFUL            = const ResponseStatusFamily("SUCCESSFUL",200)
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Static Methods</h3>
+<div class="method"><h4 id="values">
+<button class="show-code">Code</button>
+List&lt;<a href="../httputils/ResponseStatusFamily.html">ResponseStatusFamily</a>&gt; <strong>values</strong>() <a class="anchor-link" href="#values"
+              title="Permalink to ResponseStatusFamily.values">#</a></h4>
+<div class="doc">
+<p>Returns a List containing the constants of type, in the order they are declared.</p>
+<pre class="source">
+static List&lt;ResponseStatusFamily&gt; values() {
+ if(_values.length == 0) {
+   _values.add(COMMUNICATION_FAILED);
+   _values.add(INFORMATIONAL);
+   _values.add(SUCCESSFUL);
+   _values.add(REDIRECTION);
+   _values.add(CLIENT_ERROR);
+   _values.add(SERVER_ERROR);
+ }
+ 
+ return _values;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="valueOf">
+<button class="show-code">Code</button>
+<a href="../httputils/ResponseStatusFamily.html">ResponseStatusFamily</a> <strong>valueOf</strong>(String name) <a class="anchor-link" href="#valueOf"
+              title="Permalink to ResponseStatusFamily.valueOf">#</a></h4>
+<div class="doc">
+<p>Returns the constant of this type with the specified name.</p>
+<pre class="source">
+static ResponseStatusFamily valueOf(final String name) {
+ if(name == null || name.isEmpty) {
+   throw new ArgumentError("ResponseStatusFamily-name must not be null or empty");
+ }
+ 
+ ResponseStatusFamily family = values().firstWhere((final ResponseStatusFamily element) =&gt; name.toUpperCase() == element.name);
+ 
+ return family;
+}
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Constructors</h3>
+<div class="method"><h4 id="">
+<button class="show-code">Code</button>
+const <strong>ResponseStatusFamily</strong>(String _name, int _value) <a class="anchor-link" href="#"
+              title="Permalink to ResponseStatusFamily.ResponseStatusFamily">#</a></h4>
+<div class="doc">
+<div class="inherited">
+<p>Creates a new <a class="crossref" href="../dart_core/Object.html">Object</a> instance.</p>
+<p><a class="crossref" href="../dart_core/Object.html">Object</a> instances have no meaningful state, and are only useful
+through their identity. An <a class="crossref" href="../dart_core/Object.html">Object</a> instance is equal to itself
+only.</p>
+<div class="docs-inherited-from">docs inherited from Object </div></div>
+<pre class="source">
+const ResponseStatusFamily(this._name,this._value);
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="name">
+<button class="show-code">Code</button>
+final String         <strong>name</strong> <a class="anchor-link"
+            href="#name"
+            title="Permalink to ResponseStatusFamily.name">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+String get name =&gt; _name;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="value">
+<button class="show-code">Code</button>
+final int         <strong>value</strong> <a class="anchor-link"
+            href="#value"
+            title="Permalink to ResponseStatusFamily.value">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+int get value =&gt; _value;
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Methods</h3>
+<div class="method"><h4 id="toString">
+<button class="show-code">Code</button>
+String <strong>toString</strong>() <a class="anchor-link" href="#toString"
+              title="Permalink to ResponseStatusFamily.toString">#</a></h4>
+<div class="doc">
+<div class="inherited">
+<p>Returns a string representation of this object.</p>
+<div class="docs-inherited-from">docs inherited from Object </div></div>
+<pre class="source">
+String toString() =&gt; _name;
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          <div>This page was generated at 2013-07-26 13:43:59.654</div>
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        

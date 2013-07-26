@@ -20,6 +20,7 @@ Dart Documentation fur HTTPStatus is [here][7]
 http_utils on [PUB][8]
 
 ###History###
+* 1.2.0 - Port of Response.Status and Response.Status.Family to Dart added
 * 1.1.1 - Its possible to generate a local-file urls (relative path)
 * 1.1.1 - Test for WebSocket-Scheme added
 * 1.1.0 - RestUrl provides you with some default settings for your server and generats Urls, Uris or URIBuilder

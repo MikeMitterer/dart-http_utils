@@ -1,0 +1,890 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>ResponseStatus class / httputils Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="httputils" data-type="ResponseStatus">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../httputils.html">httputils</a> &rsaquo; <a href="../httputils/ResponseStatus.html">ResponseStatus</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>ResponseStatus</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<p>Commonly used status codes defined by HTTP</p>
+<pre class="source">
+class ResponseStatus {
+ static final List&lt;ResponseStatus&gt; _values = new List&lt;ResponseStatus&gt;();
+ 
+ final String                _name;
+ final ResponseStatusFamily  _family;
+ final int                   _code;
+ final String                _reason;
+ 
+ const ResponseStatus(this._name,this._family,this._code,this._reason);
+ 
+ /// Get the Status-Name as String
+ String get                name =&gt; _name;
+ 
+ /// Get the class of status code
+ ResponseStatusFamily get  family =&gt; _family;
+ 
+ /// Get the reason phrase
+ String get                reason =&gt; _reason;
+ 
+ /// Get the associated status code
+ int get                   code =&gt; _code;
+ 
+ /// Get the reason phrase
+ String toString() =&gt; _reason;
+ 
+ /** HTTP Status-Code: 0 (Communication failed) */
+ static const ResponseStatus COMMUNICATION_FAILED = const ResponseStatus("COMMUNICATION_FAILED",ResponseStatusFamily.COMMUNICATION_FAILED,0,"Communication failed");
+ 
+ /** HTTP Status-Code: 200 (OK) */
+ static const ResponseStatus OK = const ResponseStatus("OK",ResponseStatusFamily.SUCCESSFUL,200,"OK");
+ 
+ /** HTTP Status-Code: 201 (Created) */
+ static const ResponseStatus CREATED = const ResponseStatus("CREATED",ResponseStatusFamily.SUCCESSFUL,201,"Created");
+
+ /** HTTP Status-Code: 202 (Accepted) */
+ static const ResponseStatus ACCEPTED = const ResponseStatus("ACCEPTED",ResponseStatusFamily.SUCCESSFUL,202,"Accepted");
+
+ /** HTTP Status-Code: 203 (Non-Authoritative Information) */
+ static const ResponseStatus NOT_AUTHORITATIVE = const ResponseStatus("NOT_AUTHORITATIVE",ResponseStatusFamily.SUCCESSFUL,203,"Non-Authoritative Information");
+
+ /** HTTP Status-Code: 204 (No Content) */
+ static const ResponseStatus NO_CONTENT = const ResponseStatus("NO_CONTENT",ResponseStatusFamily.SUCCESSFUL,204,"No Content");
+
+ /** HTTP Status-Code: 205 (Reset Content) */
+ static const ResponseStatus RESET = const ResponseStatus("RESET",ResponseStatusFamily.SUCCESSFUL,205,"Reset Content");
+
+ /** HTTP Status-Code: 206 (Partial Content) */
+ static const ResponseStatus PARTIAL = const ResponseStatus("PARTIAL",ResponseStatusFamily.SUCCESSFUL,206,"Partial Content");
+
+ /** HTTP Status-Code: 300 (Multiple Choices) */
+ static const ResponseStatus MULT_CHOICE = const ResponseStatus("MULT_CHOICE",ResponseStatusFamily.REDIRECTION,300,"Multiple Choices");
+
+ /** HTTP Status-Code: 301 (Moved Permanently) */
+ static const ResponseStatus MOVED_PERM = const ResponseStatus("MOVED_PERM",ResponseStatusFamily.REDIRECTION,301,"Moved Permanently");
+
+ /** HTTP Status-Code: 302 (Temporary Redirect) */
+ static const ResponseStatus MOVED_TEMP = const ResponseStatus("MOVED_TEMP",ResponseStatusFamily.REDIRECTION,302,"Temporary Redirect");
+
+ /** HTTP Status-Code: 303 (See Other) */
+ static const ResponseStatus SEE_OTHER = const ResponseStatus("SEE_OTHER",ResponseStatusFamily.REDIRECTION,303,"See Other");
+
+ /** HTTP Status-Code: 304 (Not Modified) */
+ static const ResponseStatus NOT_MODIFIED = const ResponseStatus("NOT_MODIFIED",ResponseStatusFamily.REDIRECTION,304,"Not Modified");
+
+ /** HTTP Status-Code: 305 (Use Proxy) */
+ static const ResponseStatus USE_PROXY = const ResponseStatus("USE_PROXY",ResponseStatusFamily.REDIRECTION,305,"Use Proxy");
+
+ /** HTTP Status-Code: 400 (Bad Request) */
+ static const ResponseStatus BAD_REQUEST = const ResponseStatus("BAD_REQUEST",ResponseStatusFamily.CLIENT_ERROR,400,"Bad Request");
+
+ /** HTTP Status-Code: 401 (Unauthorized) */
+ static const ResponseStatus SERVER_ERROR = const ResponseStatus("SERVER_ERROR",ResponseStatusFamily.CLIENT_ERROR,401,"Unauthorized");
+
+ /** HTTP Status-Code: 402 (Payment Required) */
+ static const ResponseStatus PAYMENT_REQUIRED = const ResponseStatus("PAYMENT_REQUIRED",ResponseStatusFamily.CLIENT_ERROR,402,"Payment Required");
+
+ /** HTTP Status-Code: 403 (Forbidden) */
+ static const ResponseStatus FORBIDDEN = const ResponseStatus("FORBIDDEN",ResponseStatusFamily.CLIENT_ERROR,403,"Forbidden");
+
+ /** HTTP Status-Code: 404 (Not Found) */
+ static const ResponseStatus NOT_FOUND = const ResponseStatus("NOT_FOUND",ResponseStatusFamily.CLIENT_ERROR,404,"Not Found");
+
+ /** HTTP Status-Code: 405 (Method Not Allowed) */
+ static const ResponseStatus BAD_METHOD = const ResponseStatus("BAD_METHOD",ResponseStatusFamily.CLIENT_ERROR,405,"Method Not Allowed");
+
+ /** HTTP Status-Code: 406 (Not Acceptable) */
+ static const ResponseStatus NOT_ACCEPTABLE = const ResponseStatus("NOT_ACCEPTABLE",ResponseStatusFamily.CLIENT_ERROR,406,"Not Acceptable");
+
+ /** HTTP Status-Code: 407 (Proxy Authentication Required) */
+ static const ResponseStatus PROXY_AUTH = const ResponseStatus("PROXY_AUTH",ResponseStatusFamily.CLIENT_ERROR,407,"Proxy Authentication Required");
+
+ /** HTTP Status-Code: 408 (Request Time-Out) */
+ static const ResponseStatus CLIENT_TIMEOUT = const ResponseStatus("CLIENT_TIMEOUT",ResponseStatusFamily.CLIENT_ERROR,408,"Request Time-Out");
+
+ /** HTTP Status-Code: 409 (Conflict) */
+ static const ResponseStatus CONFLICT = const ResponseStatus("CONFLICT",ResponseStatusFamily.CLIENT_ERROR,409,"Conflict");
+
+ /** HTTP Status-Code: 410 (Gone) */
+ static const ResponseStatus GONE = const ResponseStatus("GONE",ResponseStatusFamily.CLIENT_ERROR,410,"Gone");
+
+ /** HTTP Status-Code: 411 (Length Required) */
+ static const ResponseStatus LENGTH_REQUIRED = const ResponseStatus("LENGTH_REQUIRED",ResponseStatusFamily.CLIENT_ERROR,411,"Length Required");
+
+ /** HTTP Status-Code: 412 (Precondition Failed) */
+ static const ResponseStatus PRECON_FAILED = const ResponseStatus("PRECON_FAILED",ResponseStatusFamily.CLIENT_ERROR,412,"Precondition Failed");
+
+ /** HTTP Status-Code: 413 (Request Entity Too Large) */
+ static const ResponseStatus ENTITY_TOO_LARGE = const ResponseStatus("ENTITY_TOO_LARGE",ResponseStatusFamily.CLIENT_ERROR,413,"Request Entity Too Large");
+
+ /** HTTP Status-Code: 414 (Request-URI Too Large) */
+ static const ResponseStatus REQ_TOO_LONG = const ResponseStatus("REQ_TOO_LONG",ResponseStatusFamily.CLIENT_ERROR,414,"Request-URI Too Large");
+
+ /** HTTP Status-Code: 415 (Unsupported Media Type) */
+ static const ResponseStatus UNSUPPORTED_TYPE = const ResponseStatus("UNSUPPORTED_TYPE",ResponseStatusFamily.CLIENT_ERROR,415,"Unsupported Media Type");
+
+ /** HTTP Status-Code: 500 (Internal Server Error) */
+ static const ResponseStatus INTERNAL_ERROR = const ResponseStatus("INTERNAL_ERROR",ResponseStatusFamily.SERVER_ERROR,500,"Internal Server Error");
+
+ /** HTTP Status-Code: 501 (Not Implemented) */
+ static const ResponseStatus NOT_IMPLEMENTED = const ResponseStatus("NOT_IMPLEMENTED",ResponseStatusFamily.SERVER_ERROR,501,"Not Implemented");
+
+ /** HTTP Status-Code: 502 (Bad Gateway) */
+ static const ResponseStatus BAD_GATEWAY = const ResponseStatus("BAD_GATEWAY",ResponseStatusFamily.SERVER_ERROR,502,"Bad Gateway");
+
+ /** HTTP Status-Code: 503 (Service Unavailable) */
+ static const ResponseStatus UNAVAILABLE = const ResponseStatus("UNAVAILABLE",ResponseStatusFamily.SERVER_ERROR,503,"Service Unavailable");
+
+ /** HTTP Status-Code: 504 (Gateway Timeout) */
+ static const ResponseStatus GATEWAY_TIMEOUT = const ResponseStatus("GATEWAY_TIMEOUT",ResponseStatusFamily.SERVER_ERROR,504,"Gateway Timeout");
+
+ /** HTTP Status-Code: 505 (HTTP Version Not Supported) */
+ static const ResponseStatus VERSION = const ResponseStatus("VERSION",ResponseStatusFamily.SERVER_ERROR,505,"HTTP Version Not Supported");
+ 
+ static List&lt;ResponseStatus&gt; values() {
+   if(_values.length == 0) {
+     _values.add(COMMUNICATION_FAILED);
+     _values.add(OK);
+     _values.add(CREATED);
+     _values.add(ACCEPTED);
+     _values.add(NOT_AUTHORITATIVE);
+     _values.add(NO_CONTENT);
+     _values.add(RESET);
+     _values.add(PARTIAL);
+     _values.add(MULT_CHOICE);
+     _values.add(MOVED_PERM);
+     _values.add(MOVED_TEMP);
+     _values.add(SEE_OTHER);
+     _values.add(NOT_MODIFIED);
+     _values.add(USE_PROXY);
+     _values.add(BAD_REQUEST);
+     _values.add(SERVER_ERROR);
+     _values.add(PAYMENT_REQUIRED);
+     _values.add(FORBIDDEN);
+     _values.add(NOT_FOUND);
+     _values.add(BAD_METHOD);
+     _values.add(NOT_ACCEPTABLE);
+     _values.add(PROXY_AUTH);
+     _values.add(CLIENT_TIMEOUT);
+     _values.add(CONFLICT);
+     _values.add(GONE);
+     _values.add(LENGTH_REQUIRED);
+     _values.add(PRECON_FAILED);
+     _values.add(ENTITY_TOO_LARGE);
+     _values.add(REQ_TOO_LONG);
+     _values.add(UNSUPPORTED_TYPE);
+     _values.add(INTERNAL_ERROR);
+     _values.add(NOT_IMPLEMENTED);
+     _values.add(BAD_GATEWAY);
+     _values.add(UNAVAILABLE);
+     _values.add(GATEWAY_TIMEOUT);
+     _values.add(VERSION);
+   }
+   return _values;
+ }
+ 
+ /// Returns the constant value of this type with the specified name.
+ static ResponseStatus valueOf(final String name) {
+   if(name == null || name.isEmpty) {
+     throw new ArgumentError("ResponseStatus-name must not be null or empty");
+   }
+   
+   ResponseStatus status = values().firstWhere((final ResponseStatus element) =&gt; name.toUpperCase() == element.name);
+   return status;
+ }
+ 
+ /// Convert a numerical status code into the corresponding Status
+ static ResponseStatus fromStatusCode(final int statusCode) {
+   if(statusCode &lt; 0 || statusCode &gt; 503) {
+     throw new ArgumentError("Status-Code must be a positive value and must not be higher than 503 but was $statusCode");
+   }    
+   
+   ResponseStatus status = values().firstWhere((final ResponseStatus element) =&gt; element.code == statusCode);
+   return status;
+ }
+}
+</pre>
+</div>
+<div>
+<h3>Static Properties</h3>
+<div class="field"><h4 id="ACCEPTED">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>ACCEPTED</strong> <a class="anchor-link"
+            href="#ACCEPTED"
+            title="Permalink to ResponseStatus.ACCEPTED">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 202 (Accepted) </p>
+<pre class="source">
+static const ResponseStatus ACCEPTED = const ResponseStatus("ACCEPTED",ResponseStatusFamily.SUCCESSFUL,202,"Accepted")
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="BAD_GATEWAY">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>BAD_GATEWAY</strong> <a class="anchor-link"
+            href="#BAD_GATEWAY"
+            title="Permalink to ResponseStatus.BAD_GATEWAY">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 502 (Bad Gateway) </p>
+<pre class="source">
+static const ResponseStatus BAD_GATEWAY = const ResponseStatus("BAD_GATEWAY",ResponseStatusFamily.SERVER_ERROR,502,"Bad Gateway")
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="BAD_METHOD">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>BAD_METHOD</strong> <a class="anchor-link"
+            href="#BAD_METHOD"
+            title="Permalink to ResponseStatus.BAD_METHOD">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 405 (Method Not Allowed) </p>
+<pre class="source">
+static const ResponseStatus BAD_METHOD = const ResponseStatus("BAD_METHOD",ResponseStatusFamily.CLIENT_ERROR,405,"Method Not Allowed")
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="BAD_REQUEST">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>BAD_REQUEST</strong> <a class="anchor-link"
+            href="#BAD_REQUEST"
+            title="Permalink to ResponseStatus.BAD_REQUEST">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 400 (Bad Request) </p>
+<pre class="source">
+static const ResponseStatus BAD_REQUEST = const ResponseStatus("BAD_REQUEST",ResponseStatusFamily.CLIENT_ERROR,400,"Bad Request")
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="CLIENT_TIMEOUT">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>CLIENT_TIMEOUT</strong> <a class="anchor-link"
+            href="#CLIENT_TIMEOUT"
+            title="Permalink to ResponseStatus.CLIENT_TIMEOUT">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 408 (Request Time-Out) </p>
+<pre class="source">
+static const ResponseStatus CLIENT_TIMEOUT = const ResponseStatus("CLIENT_TIMEOUT",ResponseStatusFamily.CLIENT_ERROR,408,"Request Time-Out")
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="COMMUNICATION_FAILED">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>COMMUNICATION_FAILED</strong> <a class="anchor-link"
+            href="#COMMUNICATION_FAILED"
+            title="Permalink to ResponseStatus.COMMUNICATION_FAILED">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 0 (Communication failed) </p>
+<pre class="source">
+static const ResponseStatus COMMUNICATION_FAILED = const ResponseStatus("COMMUNICATION_FAILED",ResponseStatusFamily.COMMUNICATION_FAILED,0,"Communication failed")
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="CONFLICT">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>CONFLICT</strong> <a class="anchor-link"
+            href="#CONFLICT"
+            title="Permalink to ResponseStatus.CONFLICT">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 409 (Conflict) </p>
+<pre class="source">
+static const ResponseStatus CONFLICT = const ResponseStatus("CONFLICT",ResponseStatusFamily.CLIENT_ERROR,409,"Conflict")
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="CREATED">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>CREATED</strong> <a class="anchor-link"
+            href="#CREATED"
+            title="Permalink to ResponseStatus.CREATED">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 201 (Created) </p>
+<pre class="source">
+static const ResponseStatus CREATED = const ResponseStatus("CREATED",ResponseStatusFamily.SUCCESSFUL,201,"Created")
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="ENTITY_TOO_LARGE">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>ENTITY_TOO_LARGE</strong> <a class="anchor-link"
+            href="#ENTITY_TOO_LARGE"
+            title="Permalink to ResponseStatus.ENTITY_TOO_LARGE">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 413 (Request Entity Too Large) </p>
+<pre class="source">
+static const ResponseStatus ENTITY_TOO_LARGE = const ResponseStatus("ENTITY_TOO_LARGE",ResponseStatusFamily.CLIENT_ERROR,413,"Request Entity Too Large")
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="FORBIDDEN">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>FORBIDDEN</strong> <a class="anchor-link"
+            href="#FORBIDDEN"
+            title="Permalink to ResponseStatus.FORBIDDEN">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 403 (Forbidden) </p>
+<pre class="source">
+static const ResponseStatus FORBIDDEN = const ResponseStatus("FORBIDDEN",ResponseStatusFamily.CLIENT_ERROR,403,"Forbidden")
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="GATEWAY_TIMEOUT">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>GATEWAY_TIMEOUT</strong> <a class="anchor-link"
+            href="#GATEWAY_TIMEOUT"
+            title="Permalink to ResponseStatus.GATEWAY_TIMEOUT">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 504 (Gateway Timeout) </p>
+<pre class="source">
+static const ResponseStatus GATEWAY_TIMEOUT = const ResponseStatus("GATEWAY_TIMEOUT",ResponseStatusFamily.SERVER_ERROR,504,"Gateway Timeout")
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="GONE">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>GONE</strong> <a class="anchor-link"
+            href="#GONE"
+            title="Permalink to ResponseStatus.GONE">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 410 (Gone) </p>
+<pre class="source">
+static const ResponseStatus GONE = const ResponseStatus("GONE",ResponseStatusFamily.CLIENT_ERROR,410,"Gone")
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="INTERNAL_ERROR">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>INTERNAL_ERROR</strong> <a class="anchor-link"
+            href="#INTERNAL_ERROR"
+            title="Permalink to ResponseStatus.INTERNAL_ERROR">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 500 (Internal Server Error) </p>
+<pre class="source">
+static const ResponseStatus INTERNAL_ERROR = const ResponseStatus("INTERNAL_ERROR",ResponseStatusFamily.SERVER_ERROR,500,"Internal Server Error")
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="LENGTH_REQUIRED">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>LENGTH_REQUIRED</strong> <a class="anchor-link"
+            href="#LENGTH_REQUIRED"
+            title="Permalink to ResponseStatus.LENGTH_REQUIRED">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 411 (Length Required) </p>
+<pre class="source">
+static const ResponseStatus LENGTH_REQUIRED = const ResponseStatus("LENGTH_REQUIRED",ResponseStatusFamily.CLIENT_ERROR,411,"Length Required")
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="MOVED_PERM">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>MOVED_PERM</strong> <a class="anchor-link"
+            href="#MOVED_PERM"
+            title="Permalink to ResponseStatus.MOVED_PERM">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 301 (Moved Permanently) </p>
+<pre class="source">
+static const ResponseStatus MOVED_PERM = const ResponseStatus("MOVED_PERM",ResponseStatusFamily.REDIRECTION,301,"Moved Permanently")
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="MOVED_TEMP">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>MOVED_TEMP</strong> <a class="anchor-link"
+            href="#MOVED_TEMP"
+            title="Permalink to ResponseStatus.MOVED_TEMP">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 302 (Temporary Redirect) </p>
+<pre class="source">
+static const ResponseStatus MOVED_TEMP = const ResponseStatus("MOVED_TEMP",ResponseStatusFamily.REDIRECTION,302,"Temporary Redirect")
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="MULT_CHOICE">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>MULT_CHOICE</strong> <a class="anchor-link"
+            href="#MULT_CHOICE"
+            title="Permalink to ResponseStatus.MULT_CHOICE">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 300 (Multiple Choices) </p>
+<pre class="source">
+static const ResponseStatus MULT_CHOICE = const ResponseStatus("MULT_CHOICE",ResponseStatusFamily.REDIRECTION,300,"Multiple Choices")
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="NO_CONTENT">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>NO_CONTENT</strong> <a class="anchor-link"
+            href="#NO_CONTENT"
+            title="Permalink to ResponseStatus.NO_CONTENT">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 204 (No Content) </p>
+<pre class="source">
+static const ResponseStatus NO_CONTENT = const ResponseStatus("NO_CONTENT",ResponseStatusFamily.SUCCESSFUL,204,"No Content")
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="NOT_ACCEPTABLE">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>NOT_ACCEPTABLE</strong> <a class="anchor-link"
+            href="#NOT_ACCEPTABLE"
+            title="Permalink to ResponseStatus.NOT_ACCEPTABLE">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 406 (Not Acceptable) </p>
+<pre class="source">
+static const ResponseStatus NOT_ACCEPTABLE = const ResponseStatus("NOT_ACCEPTABLE",ResponseStatusFamily.CLIENT_ERROR,406,"Not Acceptable")
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="NOT_AUTHORITATIVE">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>NOT_AUTHORITATIVE</strong> <a class="anchor-link"
+            href="#NOT_AUTHORITATIVE"
+            title="Permalink to ResponseStatus.NOT_AUTHORITATIVE">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 203 (Non-Authoritative Information) </p>
+<pre class="source">
+static const ResponseStatus NOT_AUTHORITATIVE = const ResponseStatus("NOT_AUTHORITATIVE",ResponseStatusFamily.SUCCESSFUL,203,"Non-Authoritative Information")
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="NOT_FOUND">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>NOT_FOUND</strong> <a class="anchor-link"
+            href="#NOT_FOUND"
+            title="Permalink to ResponseStatus.NOT_FOUND">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 404 (Not Found) </p>
+<pre class="source">
+static const ResponseStatus NOT_FOUND = const ResponseStatus("NOT_FOUND",ResponseStatusFamily.CLIENT_ERROR,404,"Not Found")
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="NOT_IMPLEMENTED">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>NOT_IMPLEMENTED</strong> <a class="anchor-link"
+            href="#NOT_IMPLEMENTED"
+            title="Permalink to ResponseStatus.NOT_IMPLEMENTED">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 501 (Not Implemented) </p>
+<pre class="source">
+static const ResponseStatus NOT_IMPLEMENTED = const ResponseStatus("NOT_IMPLEMENTED",ResponseStatusFamily.SERVER_ERROR,501,"Not Implemented")
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="NOT_MODIFIED">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>NOT_MODIFIED</strong> <a class="anchor-link"
+            href="#NOT_MODIFIED"
+            title="Permalink to ResponseStatus.NOT_MODIFIED">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 304 (Not Modified) </p>
+<pre class="source">
+static const ResponseStatus NOT_MODIFIED = const ResponseStatus("NOT_MODIFIED",ResponseStatusFamily.REDIRECTION,304,"Not Modified")
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="OK">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>OK</strong> <a class="anchor-link"
+            href="#OK"
+            title="Permalink to ResponseStatus.OK">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 200 (OK) </p>
+<pre class="source">
+static const ResponseStatus OK = const ResponseStatus("OK",ResponseStatusFamily.SUCCESSFUL,200,"OK")
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="PARTIAL">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>PARTIAL</strong> <a class="anchor-link"
+            href="#PARTIAL"
+            title="Permalink to ResponseStatus.PARTIAL">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 206 (Partial Content) </p>
+<pre class="source">
+static const ResponseStatus PARTIAL = const ResponseStatus("PARTIAL",ResponseStatusFamily.SUCCESSFUL,206,"Partial Content")
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="PAYMENT_REQUIRED">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>PAYMENT_REQUIRED</strong> <a class="anchor-link"
+            href="#PAYMENT_REQUIRED"
+            title="Permalink to ResponseStatus.PAYMENT_REQUIRED">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 402 (Payment Required) </p>
+<pre class="source">
+static const ResponseStatus PAYMENT_REQUIRED = const ResponseStatus("PAYMENT_REQUIRED",ResponseStatusFamily.CLIENT_ERROR,402,"Payment Required")
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="PRECON_FAILED">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>PRECON_FAILED</strong> <a class="anchor-link"
+            href="#PRECON_FAILED"
+            title="Permalink to ResponseStatus.PRECON_FAILED">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 412 (Precondition Failed) </p>
+<pre class="source">
+static const ResponseStatus PRECON_FAILED = const ResponseStatus("PRECON_FAILED",ResponseStatusFamily.CLIENT_ERROR,412,"Precondition Failed")
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="PROXY_AUTH">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>PROXY_AUTH</strong> <a class="anchor-link"
+            href="#PROXY_AUTH"
+            title="Permalink to ResponseStatus.PROXY_AUTH">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 407 (Proxy Authentication Required) </p>
+<pre class="source">
+static const ResponseStatus PROXY_AUTH = const ResponseStatus("PROXY_AUTH",ResponseStatusFamily.CLIENT_ERROR,407,"Proxy Authentication Required")
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="REQ_TOO_LONG">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>REQ_TOO_LONG</strong> <a class="anchor-link"
+            href="#REQ_TOO_LONG"
+            title="Permalink to ResponseStatus.REQ_TOO_LONG">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 414 (Request-URI Too Large) </p>
+<pre class="source">
+static const ResponseStatus REQ_TOO_LONG = const ResponseStatus("REQ_TOO_LONG",ResponseStatusFamily.CLIENT_ERROR,414,"Request-URI Too Large")
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="RESET">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>RESET</strong> <a class="anchor-link"
+            href="#RESET"
+            title="Permalink to ResponseStatus.RESET">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 205 (Reset Content) </p>
+<pre class="source">
+static const ResponseStatus RESET = const ResponseStatus("RESET",ResponseStatusFamily.SUCCESSFUL,205,"Reset Content")
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="SEE_OTHER">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>SEE_OTHER</strong> <a class="anchor-link"
+            href="#SEE_OTHER"
+            title="Permalink to ResponseStatus.SEE_OTHER">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 303 (See Other) </p>
+<pre class="source">
+static const ResponseStatus SEE_OTHER = const ResponseStatus("SEE_OTHER",ResponseStatusFamily.REDIRECTION,303,"See Other")
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="SERVER_ERROR">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>SERVER_ERROR</strong> <a class="anchor-link"
+            href="#SERVER_ERROR"
+            title="Permalink to ResponseStatus.SERVER_ERROR">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 401 (Unauthorized) </p>
+<pre class="source">
+static const ResponseStatus SERVER_ERROR = const ResponseStatus("SERVER_ERROR",ResponseStatusFamily.CLIENT_ERROR,401,"Unauthorized")
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="UNAVAILABLE">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>UNAVAILABLE</strong> <a class="anchor-link"
+            href="#UNAVAILABLE"
+            title="Permalink to ResponseStatus.UNAVAILABLE">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 503 (Service Unavailable) </p>
+<pre class="source">
+static const ResponseStatus UNAVAILABLE = const ResponseStatus("UNAVAILABLE",ResponseStatusFamily.SERVER_ERROR,503,"Service Unavailable")
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="UNSUPPORTED_TYPE">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>UNSUPPORTED_TYPE</strong> <a class="anchor-link"
+            href="#UNSUPPORTED_TYPE"
+            title="Permalink to ResponseStatus.UNSUPPORTED_TYPE">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 415 (Unsupported Media Type) </p>
+<pre class="source">
+static const ResponseStatus UNSUPPORTED_TYPE = const ResponseStatus("UNSUPPORTED_TYPE",ResponseStatusFamily.CLIENT_ERROR,415,"Unsupported Media Type")
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="USE_PROXY">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>USE_PROXY</strong> <a class="anchor-link"
+            href="#USE_PROXY"
+            title="Permalink to ResponseStatus.USE_PROXY">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 305 (Use Proxy) </p>
+<pre class="source">
+static const ResponseStatus USE_PROXY = const ResponseStatus("USE_PROXY",ResponseStatusFamily.REDIRECTION,305,"Use Proxy")
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="VERSION">
+<button class="show-code">Code</button>
+const <a href="../httputils/ResponseStatus.html">ResponseStatus</a>         <strong>VERSION</strong> <a class="anchor-link"
+            href="#VERSION"
+            title="Permalink to ResponseStatus.VERSION">#</a>
+        </h4>
+        <div class="doc">
+<p>HTTP Status-Code: 505 (HTTP Version Not Supported) </p>
+<pre class="source">
+static const ResponseStatus VERSION = const ResponseStatus("VERSION",ResponseStatusFamily.SERVER_ERROR,505,"HTTP Version Not Supported")
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Static Methods</h3>
+<div class="method"><h4 id="values">
+<button class="show-code">Code</button>
+List&lt;<a href="../httputils/ResponseStatus.html">ResponseStatus</a>&gt; <strong>values</strong>() <a class="anchor-link" href="#values"
+              title="Permalink to ResponseStatus.values">#</a></h4>
+<div class="doc">
+<pre class="source">
+static List&lt;ResponseStatus&gt; values() {
+ if(_values.length == 0) {
+   _values.add(COMMUNICATION_FAILED);
+   _values.add(OK);
+   _values.add(CREATED);
+   _values.add(ACCEPTED);
+   _values.add(NOT_AUTHORITATIVE);
+   _values.add(NO_CONTENT);
+   _values.add(RESET);
+   _values.add(PARTIAL);
+   _values.add(MULT_CHOICE);
+   _values.add(MOVED_PERM);
+   _values.add(MOVED_TEMP);
+   _values.add(SEE_OTHER);
+   _values.add(NOT_MODIFIED);
+   _values.add(USE_PROXY);
+   _values.add(BAD_REQUEST);
+   _values.add(SERVER_ERROR);
+   _values.add(PAYMENT_REQUIRED);
+   _values.add(FORBIDDEN);
+   _values.add(NOT_FOUND);
+   _values.add(BAD_METHOD);
+   _values.add(NOT_ACCEPTABLE);
+   _values.add(PROXY_AUTH);
+   _values.add(CLIENT_TIMEOUT);
+   _values.add(CONFLICT);
+   _values.add(GONE);
+   _values.add(LENGTH_REQUIRED);
+   _values.add(PRECON_FAILED);
+   _values.add(ENTITY_TOO_LARGE);
+   _values.add(REQ_TOO_LONG);
+   _values.add(UNSUPPORTED_TYPE);
+   _values.add(INTERNAL_ERROR);
+   _values.add(NOT_IMPLEMENTED);
+   _values.add(BAD_GATEWAY);
+   _values.add(UNAVAILABLE);
+   _values.add(GATEWAY_TIMEOUT);
+   _values.add(VERSION);
+ }
+ return _values;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="valueOf">
+<button class="show-code">Code</button>
+<a href="../httputils/ResponseStatus.html">ResponseStatus</a> <strong>valueOf</strong>(String name) <a class="anchor-link" href="#valueOf"
+              title="Permalink to ResponseStatus.valueOf">#</a></h4>
+<div class="doc">
+<p>Returns the constant value of this type with the specified name.</p>
+<pre class="source">
+static ResponseStatus valueOf(final String name) {
+ if(name == null || name.isEmpty) {
+   throw new ArgumentError("ResponseStatus-name must not be null or empty");
+ }
+ 
+ ResponseStatus status = values().firstWhere((final ResponseStatus element) =&gt; name.toUpperCase() == element.name);
+ return status;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="fromStatusCode">
+<button class="show-code">Code</button>
+<a href="../httputils/ResponseStatus.html">ResponseStatus</a> <strong>fromStatusCode</strong>(int statusCode) <a class="anchor-link" href="#fromStatusCode"
+              title="Permalink to ResponseStatus.fromStatusCode">#</a></h4>
+<div class="doc">
+<p>Convert a numerical status code into the corresponding Status</p>
+<pre class="source">
+static ResponseStatus fromStatusCode(final int statusCode) {
+ if(statusCode &lt; 0 || statusCode &gt; 503) {
+   throw new ArgumentError("Status-Code must be a positive value and must not be higher than 503 but was $statusCode");
+ }    
+ 
+ ResponseStatus status = values().firstWhere((final ResponseStatus element) =&gt; element.code == statusCode);
+ return status;
+}
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Constructors</h3>
+<div class="method"><h4 id="">
+<button class="show-code">Code</button>
+const <strong>ResponseStatus</strong>(String _name, <a href="../httputils/ResponseStatusFamily.html">ResponseStatusFamily</a> _family, int _code, String _reason) <a class="anchor-link" href="#"
+              title="Permalink to ResponseStatus.ResponseStatus">#</a></h4>
+<div class="doc">
+<div class="inherited">
+<p>Creates a new <a class="crossref" href="../dart_core/Object.html">Object</a> instance.</p>
+<p><a class="crossref" href="../dart_core/Object.html">Object</a> instances have no meaningful state, and are only useful
+through their identity. An <a class="crossref" href="../dart_core/Object.html">Object</a> instance is equal to itself
+only.</p>
+<div class="docs-inherited-from">docs inherited from Object </div></div>
+<pre class="source">
+const ResponseStatus(this._name,this._family,this._code,this._reason);
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="code">
+<button class="show-code">Code</button>
+final int         <strong>code</strong> <a class="anchor-link"
+            href="#code"
+            title="Permalink to ResponseStatus.code">#</a>
+        </h4>
+        <div class="doc">
+<p>Get the associated status code</p>
+<pre class="source">
+int get                   code =&gt; _code;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="family">
+<button class="show-code">Code</button>
+final <a href="../httputils/ResponseStatusFamily.html">ResponseStatusFamily</a>         <strong>family</strong> <a class="anchor-link"
+            href="#family"
+            title="Permalink to ResponseStatus.family">#</a>
+        </h4>
+        <div class="doc">
+<p>Get the class of status code</p>
+<pre class="source">
+ResponseStatusFamily get  family =&gt; _family;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="name">
+<button class="show-code">Code</button>
+final String         <strong>name</strong> <a class="anchor-link"
+            href="#name"
+            title="Permalink to ResponseStatus.name">#</a>
+        </h4>
+        <div class="doc">
+<p>Get the Status-Name as String</p>
+<pre class="source">
+String get                name =&gt; _name;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="reason">
+<button class="show-code">Code</button>
+final String         <strong>reason</strong> <a class="anchor-link"
+            href="#reason"
+            title="Permalink to ResponseStatus.reason">#</a>
+        </h4>
+        <div class="doc">
+<p>Get the reason phrase</p>
+<pre class="source">
+String get                reason =&gt; _reason;
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Methods</h3>
+<div class="method"><h4 id="toString">
+<button class="show-code">Code</button>
+String <strong>toString</strong>() <a class="anchor-link" href="#toString"
+              title="Permalink to ResponseStatus.toString">#</a></h4>
+<div class="doc">
+<p>Get the reason phrase</p>
+<pre class="source">
+String toString() =&gt; _reason;
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          <div>This page was generated at 2013-07-26 13:43:59.668</div>
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        
