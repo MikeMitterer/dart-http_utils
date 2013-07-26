@@ -10,6 +10,7 @@ import 'package:unittest/html_enhanced_config.dart';
 import 'package:http_utils/http_utils.dart';
 
 part 'src/httpstatus_test.dart';
+part 'src/responsestatus_test.dart';
 part 'src/uribuilder_test.dart';
 part 'src/resturl_test.dart';
 
@@ -19,6 +20,7 @@ part 'src/resturl_test.dart';
 main() {
   useHtmlEnhancedConfiguration();
   testHTTPStatus();
+  testResponseStatus();
   testURIBuilder();
   testRestUrl();
 }
