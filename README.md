@@ -5,14 +5,18 @@ Over time this should become a collection of useful HTTP-Tools...
 
 If the documenation links don't not work - pls. got to [GitHub][9] - there it they'll work
 
-## URIBuilder ##
+### ResponseStatus ###
+Commonly used status codes defined by HTTP
+Dart Documentation for ResponseStatus [here][10]
+
+### URIBuilder ###
 Helps you to compose URIs.<br>
-Dart Documentation fur URIBuilder is [here][6]
+Dart Documentation for URIBuilder [here][6]
  
 For further documentation please refere to the [Unit-Tests][1].<br>
 ApiDoc for Apaches [URIBuilder][3]
 
-## HTTPStatus ##
+### HTTPStatus ###
 Brings status-code to a more readable form.
 Dart Documentation fur HTTPStatus is [here][7] 
 ([Unit-Tests][2])
@@ -54,3 +58,4 @@ If this plugin is helpful for you - please [(Circle)](http://gplus.mikemitterer.
 [7]: http://htmlpreview.github.io/?https://raw.github.com/MikeMitterer/dart-http_utils/master/lib/docs/httputils/HttpStatus.html
 [8]: http://pub.dartlang.org/packages/http_utils
 [9]: https://github.com/MikeMitterer/dart-http_utils
+[10]: http://htmlpreview.github.io/?https://raw.github.com/MikeMitterer/dart-http_utils/master/lib/docs/httputils/ResponseStatus.html
