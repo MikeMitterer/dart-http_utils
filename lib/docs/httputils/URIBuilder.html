@@ -34,8 +34,45 @@
 <div class="doc">
 <pre class="source">
 class URIBuilder {
+   static const int _SLASH = 0x2F;
+   
+   // NOTE: This code was ported from: closure-library/closure/goog/uri/utils.js
+   static final RegExp _splitRe = new RegExp(
+       '^'
+       '(?:'
+       '([^:/?#.]+)'                   // scheme - ignore special characters
+                                       // used by other URL parts such as :,
+                                       // ?, /, #, and .
+     ':)?'
+     '(?://'
+       '(?:([^/?#]*)@)?'               // userInfo
+       '(?:'
+         r'([\w\d\-\u0100-\uffff.%]*)'
+                                       // host - restrict to letters,
+                                       // digits, dashes, dots, percent
+                                       // escapes, and unicode characters.
+         '|'
+         // TODO(ajohnsen): Only allow a max number of parts?
+         r'\[([A-Fa-f0-9:.]*)\])'
+                                       // IPv6 host - restrict to hex,
+                                       // dot and colon.
+       '(?::([0-9]+))?'                // port
+     ')?'
+     r'([^?#[]+)?'                     // path
+     r'(?:\?([^#]*))?'                 // query
+     '(?:#(.*))?'                      // fragment
+     r'$');
 
-   Map&lt;String,String&gt; queryParams = new Map&lt;String,String&gt;();
+ static const _COMPONENT_SCHEME = 1;
+ static const _COMPONENT_USER_INFO = 2;
+ static const _COMPONENT_HOST = 3;
+ static const _COMPONENT_HOST_IPV6 = 4;
+ static const _COMPONENT_PORT = 5;
+ static const _COMPONENT_PATH = 6;
+ static const _COMPONENT_QUERY_DATA = 7;
+ static const _COMPONENT_FRAGMENT = 8;
+ 
+ Map&lt;String,String&gt; _queryParams = new Map&lt;String,String&gt;();
    
    String _scheme = "http";
    String _userInfo = "";
@@ -43,14 +80,15 @@ class URIBuilder {
    String _path = "";
    String _fragment = "";
    
-   int port = 0;
+   int _port = 0;
 
    URIBuilder() {
      
    }
    
    URIBuilder.fromString(final String string) {
-       _digestURI(Uri.parse(string));
+     //  _digestURI(Uri.parse(string));
+     _digestURI(_fromMatch(_toMatch(string)));
    }
 
    URIBuilder.fromUri(final Uri uri) {
@@ -72,12 +110,36 @@ class URIBuilder {
          scheme: _scheme,
          userInfo: _userInfo,
          host: _host,
-         port: port,
-         path: _path,
-         queryParameters: queryParams,
+         port: _port,
+         path: _getPath(encode),
+         queryParameters: _getQuery(encode),
+         
+         //path: _path,
+         //queryParameters: _queryParams,
+         
          fragment: _fragment
          );
-     return encode ? Uri.parse(Uri.encodeFull(uri.toString())) : uri;
+   
+   return uri;
+   /*
+   if(encode == false) {
+     return uri;
+   }
+   final String uriToEncode = uri.toString();
+   final Uri uriEncodedButWrongInJS = Uri.parse(Uri.encodeFull(uriToEncode));
+   
+   final Uri uriEncoded = new Uri(
+       scheme: uriEncodedButWrongInJS.scheme,
+       userInfo: uriEncodedButWrongInJS.userInfo,
+       host: uriEncodedButWrongInJS.host,
+       port: uriEncodedButWrongInJS.port,
+       pathSegments: uriEncodedButWrongInJS.pathSegments,
+       queryParameters: _getQuery(encode),
+       fragment: uriEncodedButWrongInJS.fragment
+       );
+   
+   return uriEncoded;
+   */
    }
 
    Uri decode() {
@@ -94,7 +156,7 @@ class URIBuilder {
     * Sets Uri scheme.
     */
    URIBuilder setScheme(final String scheme) {
-       this._scheme = scheme;
+       _scheme = scheme;
        return this;
    }
 
@@ -102,7 +164,7 @@ class URIBuilder {
     * Sets Uri user-info in a form of 'username:password'.
     */
    URIBuilder setUserInfo(final String username, final String password) {
-     this._userInfo = "$username:$password";
+     _userInfo = "$username:$password";
      return this;
    }
 
@@ -110,7 +172,7 @@ class URIBuilder {
     * Sets Uri host.
     */
    URIBuilder setHost(final String host) {
-       this._host = host;
+       _host = host;
        return this;
    }
 
@@ -118,7 +180,7 @@ class URIBuilder {
     * Sets Uri port.
     */
    URIBuilder setPort(final int port) {
-       this.port = port &lt; 0 ? 0 : port;
+       _port = port &lt; 0 ? 0 : port;
        return this;
    }
 
@@ -126,7 +188,7 @@ class URIBuilder {
     * Sets Uri path.
     */
    URIBuilder setPath(final String path) {
-       this._path = path; 
+       _path = path; 
        return this;
    }
 
@@ -134,7 +196,7 @@ class URIBuilder {
     * Removes all query parameters.
     */
    URIBuilder removeQuery() {
-       this.queryParams.clear();
+       _queryParams.clear();
        return this;
    }
 
@@ -142,7 +204,7 @@ class URIBuilder {
     * Set Uri query.
     */
    URIBuilder setQuery(final String query) {
-       queryParams = new Map&lt;String,String&gt;.from(_parseQuery(query));
+       _queryParams = new Map&lt;String,String&gt;.from(_parseQuery(query));
        return this;
    }
 
@@ -150,7 +212,7 @@ class URIBuilder {
     * Sets parameter-value pair to Uri query removing existing parameters with the same name.
     */
    URIBuilder setParameter(final String name, final String value) {
-       this.queryParams[name] =  value;
+       _queryParams[name] =  value;
        return this;
    }
 
@@ -159,7 +221,7 @@ class URIBuilder {
     * Sets Uri fragment.
     */
    URIBuilder setFragment(final String fragment) {
-       this._fragment = fragment;
+       _fragment = fragment;
        return this;
    }
 
@@ -183,14 +245,14 @@ class URIBuilder {
    }
 
    void _digestURI(final Uri uri) {
-       this._scheme = uri.scheme;
-       this._host = uri.host;
-       this.port = uri.port;
-       this._userInfo = "";
-       this._path = uri.path;
-       this._fragment = uri.fragment;
+       _scheme = uri.scheme;
+       _host = uri.host;
+       _port = uri.port;
+       _userInfo = "";
+       _path = uri.path;
+       _fragment = uri.fragment;
        
-       this.queryParams = new Map&lt;String,String&gt;.from(uri.queryParameters);
+       _queryParams = new Map&lt;String,String&gt;.from(uri.queryParameters);
    } 
    
    void _replacePathWithValues(final Map&lt;String,dynamic&gt; values) {
@@ -198,6 +260,71 @@ class URIBuilder {
        _path = _path.replaceAll("\{$key\}", values[key].toString());      
      }
    }
+   
+   Map&lt;String,String&gt; _getQuery(final bool encode) {
+     final Map&lt;String,String&gt; queryParamsEncoded = new Map&lt;String,String&gt;();
+     
+     // Sort key to get the same result in Dart and JS
+     final List&lt;String&gt; keys = _queryParams.keys.toList(growable: false)..sort((final String e1,final String e2) =&gt; e1.compareTo(e2));
+     for(final String key in keys) {
+       print("Key: $key");
+       if(encode) {
+         queryParamsEncoded[Uri.encodeQueryComponent(key)] = Uri.encodeQueryComponent(_queryParams[key]);
+       } else {
+         queryParamsEncoded[key] = _queryParams[key];
+       }
+     }
+  
+     print(queryParamsEncoded);
+     return queryParamsEncoded;      
+   }
+   
+   String _getPath(final bool encode) {
+     if(!encode || _path.isEmpty) {
+       return _path;
+     }
+     
+     final String pathToSplit = _path.isNotEmpty &amp;&amp; _path.codeUnitAt(0) == _SLASH  ? _path.substring(1) : _path;
+     
+     final List&lt;String&gt; pathSegments = pathToSplit == "" ? const&lt;String&gt;[] : pathToSplit.split("/").map(Uri.encodeComponent).toList(growable: false);
+         
+     return (_path.codeUnitAt(0) == _SLASH ? "/" : "") + pathSegments.join("/");      
+   }
+   
+   Match _toMatch(final String uri) {
+     final Match m = _splitRe.firstMatch(uri);
+     return m;
+   }
+
+   Uri _fromMatch(final Match match) {
+     final Uri uri = new Uri(
+         scheme: _emptyIfNull(match[_COMPONENT_SCHEME]),
+         userInfo: _emptyIfNull(match[_COMPONENT_USER_INFO]),
+         host: _eitherOf(match[_COMPONENT_HOST], match[_COMPONENT_HOST_IPV6]),
+         port: _parseIntOrZero(match[_COMPONENT_PORT]),
+         path: _emptyIfNull(match[_COMPONENT_PATH]),
+         query: _emptyIfNull(match[_COMPONENT_QUERY_DATA]),
+         fragment: _emptyIfNull(match[_COMPONENT_FRAGMENT])
+         );
+   
+   return uri;      
+   }
+   
+   static String _emptyIfNull(String val) =&gt; val != null ? val : '';
+
+   static int _parseIntOrZero(String val) {
+     if (val != null &amp;&amp; val != '') {
+       return int.parse(val);
+     } else {
+       return 0;
+     }
+   } 
+   
+   static String _eitherOf(String val1, String val2) {
+     if (val1 != null) return val1;
+     if (val2 != null) return val2;
+     return '';
+   }    
 }
 </pre>
 </div>
@@ -228,7 +355,8 @@ new <strong>URIBuilder.fromString</strong>(String string) <a class="anchor-link"
 <div class="doc">
 <pre class="source">
 URIBuilder.fromString(final String string) {
-   _digestURI(Uri.parse(string));
+ //  _digestURI(Uri.parse(string));
+ _digestURI(_fromMatch(_toMatch(string)));
 }
 </pre>
 </div>
@@ -274,30 +402,6 @@ bool get isNotEmpty =&gt; _path.isNotEmpty;
 </pre>
 </div>
 </div>
-<div class="field"><h4 id="port">
-<button class="show-code">Code</button>
-int         <strong>port</strong> <a class="anchor-link"
-            href="#port"
-            title="Permalink to URIBuilder.port">#</a>
-        </h4>
-        <div class="doc">
-<pre class="source">
-int port = 0
-</pre>
-</div>
-</div>
-<div class="field"><h4 id="queryParams">
-<button class="show-code">Code</button>
-Map&lt;String, String&gt;         <strong>queryParams</strong> <a class="anchor-link"
-            href="#queryParams"
-            title="Permalink to URIBuilder.queryParams">#</a>
-        </h4>
-        <div class="doc">
-<pre class="source">
-Map&lt;String,String&gt; queryParams = new Map&lt;String,String&gt;()
-</pre>
-</div>
-</div>
 </div>
 <div>
 <h3>Methods</h3>
@@ -319,12 +423,36 @@ Uri build({final Map&lt;String,dynamic&gt; values: const {},final bool encode: t
      scheme: _scheme,
      userInfo: _userInfo,
      host: _host,
-     port: port,
-     path: _path,
-     queryParameters: queryParams,
+     port: _port,
+     path: _getPath(encode),
+     queryParameters: _getQuery(encode),
+     
+     //path: _path,
+     //queryParameters: _queryParams,
+     
      fragment: _fragment
      );
- return encode ? Uri.parse(Uri.encodeFull(uri.toString())) : uri;
+
+return uri;
+/*
+if(encode == false) {
+ return uri;
+}
+final String uriToEncode = uri.toString();
+final Uri uriEncodedButWrongInJS = Uri.parse(Uri.encodeFull(uriToEncode));
+
+final Uri uriEncoded = new Uri(
+   scheme: uriEncodedButWrongInJS.scheme,
+   userInfo: uriEncodedButWrongInJS.userInfo,
+   host: uriEncodedButWrongInJS.host,
+   port: uriEncodedButWrongInJS.port,
+   pathSegments: uriEncodedButWrongInJS.pathSegments,
+   queryParameters: _getQuery(encode),
+   fragment: uriEncodedButWrongInJS.fragment
+   );
+
+return uriEncoded;
+*/
 }
 </pre>
 </div>
@@ -349,7 +477,7 @@ Uri decode() {
 <p>Removes all query parameters.</p>
 <pre class="source">
 URIBuilder removeQuery() {
-   this.queryParams.clear();
+   _queryParams.clear();
    return this;
 }
 </pre>
@@ -363,7 +491,7 @@ URIBuilder removeQuery() {
 <p>Sets Uri fragment.</p>
 <pre class="source">
 URIBuilder setFragment(final String fragment) {
-   this._fragment = fragment;
+   _fragment = fragment;
    return this;
 }
 </pre>
@@ -377,7 +505,7 @@ URIBuilder setFragment(final String fragment) {
 <p>Sets Uri host.</p>
 <pre class="source">
 URIBuilder setHost(final String host) {
-   this._host = host;
+   _host = host;
    return this;
 }
 </pre>
@@ -391,7 +519,7 @@ URIBuilder setHost(final String host) {
 <p>Sets parameter-value pair to Uri query removing existing parameters with the same name.</p>
 <pre class="source">
 URIBuilder setParameter(final String name, final String value) {
-   this.queryParams[name] =  value;
+   _queryParams[name] =  value;
    return this;
 }
 </pre>
@@ -405,7 +533,7 @@ URIBuilder setParameter(final String name, final String value) {
 <p>Sets Uri path.</p>
 <pre class="source">
 URIBuilder setPath(final String path) {
-   this._path = path; 
+   _path = path; 
    return this;
 }
 </pre>
@@ -419,7 +547,7 @@ URIBuilder setPath(final String path) {
 <p>Sets Uri port.</p>
 <pre class="source">
 URIBuilder setPort(final int port) {
-   this.port = port &lt; 0 ? 0 : port;
+   _port = port &lt; 0 ? 0 : port;
    return this;
 }
 </pre>
@@ -433,7 +561,7 @@ URIBuilder setPort(final int port) {
 <p>Set Uri query.</p>
 <pre class="source">
 URIBuilder setQuery(final String query) {
-   queryParams = new Map&lt;String,String&gt;.from(_parseQuery(query));
+   _queryParams = new Map&lt;String,String&gt;.from(_parseQuery(query));
    return this;
 }
 </pre>
@@ -447,7 +575,7 @@ URIBuilder setQuery(final String query) {
 <p>Sets Uri scheme.</p>
 <pre class="source">
 URIBuilder setScheme(final String scheme) {
-   this._scheme = scheme;
+   _scheme = scheme;
    return this;
 }
 </pre>
@@ -461,7 +589,7 @@ URIBuilder setScheme(final String scheme) {
 <p>Sets Uri user-info in a form of 'username:password'.</p>
 <pre class="source">
 URIBuilder setUserInfo(final String username, final String password) {
- this._userInfo = "$username:$password";
+ _userInfo = "$username:$password";
  return this;
 }
 </pre>
@@ -472,7 +600,7 @@ URIBuilder setUserInfo(final String username, final String password) {
         <div class="clear"></div>
         </div>
         <div class="footer">
-          <div>This page was generated at 2013-07-26 13:43:59.638</div>
+          <div>This page was generated at 2013-07-30 15:04:27.456</div>
         </div>
         <script async src="../client-live-nav.js"></script>
         </body></html>

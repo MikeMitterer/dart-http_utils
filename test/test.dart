@@ -19,6 +19,7 @@ part 'src/resturl_test.dart';
 //
 main() {
   useHtmlEnhancedConfiguration();
+  
   testHTTPStatus();
   testResponseStatus();
   testURIBuilder();

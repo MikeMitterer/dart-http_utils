@@ -21,9 +21,48 @@ part of httputils;
  *
  */
 
-class URIBuilder {
 
-    Map<String,String> queryParams = new Map<String,String>();
+
+class URIBuilder {
+    static const int _SLASH = 0x2F;
+    
+    // NOTE: This code was ported from: closure-library/closure/goog/uri/utils.js
+    static final RegExp _splitRe = new RegExp(
+        '^'
+        '(?:'
+        '([^:/?#.]+)'                   // scheme - ignore special characters
+                                        // used by other URL parts such as :,
+                                        // ?, /, #, and .
+      ':)?'
+      '(?://'
+        '(?:([^/?#]*)@)?'               // userInfo
+        '(?:'
+          r'([\w\d\-\u0100-\uffff.%]*)'
+                                        // host - restrict to letters,
+                                        // digits, dashes, dots, percent
+                                        // escapes, and unicode characters.
+          '|'
+          // TODO(ajohnsen): Only allow a max number of parts?
+          r'\[([A-Fa-f0-9:.]*)\])'
+                                        // IPv6 host - restrict to hex,
+                                        // dot and colon.
+        '(?::([0-9]+))?'                // port
+      ')?'
+      r'([^?#[]+)?'                     // path
+      r'(?:\?([^#]*))?'                 // query
+      '(?:#(.*))?'                      // fragment
+      r'$');
+
+  static const _COMPONENT_SCHEME = 1;
+  static const _COMPONENT_USER_INFO = 2;
+  static const _COMPONENT_HOST = 3;
+  static const _COMPONENT_HOST_IPV6 = 4;
+  static const _COMPONENT_PORT = 5;
+  static const _COMPONENT_PATH = 6;
+  static const _COMPONENT_QUERY_DATA = 7;
+  static const _COMPONENT_FRAGMENT = 8;
+  
+  Map<String,String> _queryParams = new Map<String,String>();
     
     String _scheme = "http";
     String _userInfo = "";
@@ -31,14 +70,15 @@ class URIBuilder {
     String _path = "";
     String _fragment = "";
     
-    int port = 0;
+    int _port = 0;
 
     URIBuilder() {
       
     }
     
     URIBuilder.fromString(final String string) {
-        _digestURI(Uri.parse(string));
+      //  _digestURI(Uri.parse(string));
+      _digestURI(_fromMatch(_toMatch(string)));
     }
 
     URIBuilder.fromUri(final Uri uri) {
@@ -60,12 +100,36 @@ class URIBuilder {
           scheme: _scheme,
           userInfo: _userInfo,
           host: _host,
-          port: port,
-          path: _path,
-          queryParameters: queryParams,
+          port: _port,
+          path: _getPath(encode),
+          queryParameters: _getQuery(encode),
+          
+          //path: _path,
+          //queryParameters: _queryParams,
+          
           fragment: _fragment
           );
-      return encode ? Uri.parse(Uri.encodeFull(uri.toString())) : uri;
+    
+    return uri;
+    /*
+    if(encode == false) {
+      return uri;
+    }
+    final String uriToEncode = uri.toString();
+    final Uri uriEncodedButWrongInJS = Uri.parse(Uri.encodeFull(uriToEncode));
+    
+    final Uri uriEncoded = new Uri(
+        scheme: uriEncodedButWrongInJS.scheme,
+        userInfo: uriEncodedButWrongInJS.userInfo,
+        host: uriEncodedButWrongInJS.host,
+        port: uriEncodedButWrongInJS.port,
+        pathSegments: uriEncodedButWrongInJS.pathSegments,
+        queryParameters: _getQuery(encode),
+        fragment: uriEncodedButWrongInJS.fragment
+        );
+    
+    return uriEncoded;
+    */
     }
 
     Uri decode() {
@@ -82,7 +146,7 @@ class URIBuilder {
      * Sets Uri scheme.
      */
     URIBuilder setScheme(final String scheme) {
-        this._scheme = scheme;
+        _scheme = scheme;
         return this;
     }
 
@@ -90,7 +154,7 @@ class URIBuilder {
      * Sets Uri user-info in a form of 'username:password'.
      */
     URIBuilder setUserInfo(final String username, final String password) {
-      this._userInfo = "$username:$password";
+      _userInfo = "$username:$password";
       return this;
     }
 
@@ -98,7 +162,7 @@ class URIBuilder {
      * Sets Uri host.
      */
     URIBuilder setHost(final String host) {
-        this._host = host;
+        _host = host;
         return this;
     }
 
@@ -106,7 +170,7 @@ class URIBuilder {
      * Sets Uri port.
      */
     URIBuilder setPort(final int port) {
-        this.port = port < 0 ? 0 : port;
+        _port = port < 0 ? 0 : port;
         return this;
     }
 
@@ -114,7 +178,7 @@ class URIBuilder {
      * Sets Uri path.
      */
     URIBuilder setPath(final String path) {
-        this._path = path; 
+        _path = path; 
         return this;
     }
 
@@ -122,7 +186,7 @@ class URIBuilder {
      * Removes all query parameters.
      */
     URIBuilder removeQuery() {
-        this.queryParams.clear();
+        _queryParams.clear();
         return this;
     }
 
@@ -130,7 +194,7 @@ class URIBuilder {
      * Set Uri query.
      */
     URIBuilder setQuery(final String query) {
-        queryParams = new Map<String,String>.from(_parseQuery(query));
+        _queryParams = new Map<String,String>.from(_parseQuery(query));
         return this;
     }
 
@@ -138,7 +202,7 @@ class URIBuilder {
      * Sets parameter-value pair to Uri query removing existing parameters with the same name.
      */
     URIBuilder setParameter(final String name, final String value) {
-        this.queryParams[name] =  value;
+        _queryParams[name] =  value;
         return this;
     }
 
@@ -147,7 +211,7 @@ class URIBuilder {
      * Sets Uri fragment.
      */
     URIBuilder setFragment(final String fragment) {
-        this._fragment = fragment;
+        _fragment = fragment;
         return this;
     }
 
@@ -171,14 +235,14 @@ class URIBuilder {
     }
  
     void _digestURI(final Uri uri) {
-        this._scheme = uri.scheme;
-        this._host = uri.host;
-        this.port = uri.port;
-        this._userInfo = "";
-        this._path = uri.path;
-        this._fragment = uri.fragment;
+        _scheme = uri.scheme;
+        _host = uri.host;
+        _port = uri.port;
+        _userInfo = "";
+        _path = uri.path;
+        _fragment = uri.fragment;
         
-        this.queryParams = new Map<String,String>.from(uri.queryParameters);
+        _queryParams = new Map<String,String>.from(uri.queryParameters);
     } 
     
     void _replacePathWithValues(final Map<String,dynamic> values) {
@@ -186,4 +250,69 @@ class URIBuilder {
         _path = _path.replaceAll("\{$key\}", values[key].toString());      
       }
     }
+    
+    Map<String,String> _getQuery(final bool encode) {
+      final Map<String,String> queryParamsEncoded = new Map<String,String>();
+      
+      // Sort key to get the same result in Dart and JS
+      final List<String> keys = _queryParams.keys.toList(growable: false)..sort((final String e1,final String e2) => e1.compareTo(e2));
+      for(final String key in keys) {
+        print("Key: $key");
+        if(encode) {
+          queryParamsEncoded[Uri.encodeQueryComponent(key)] = Uri.encodeQueryComponent(_queryParams[key]);
+        } else {
+          queryParamsEncoded[key] = _queryParams[key];
+        }
+      }
+   
+      print(queryParamsEncoded);
+      return queryParamsEncoded;      
+    }
+    
+    String _getPath(final bool encode) {
+      if(!encode || _path.isEmpty) {
+        return _path;
+      }
+      
+      final String pathToSplit = _path.isNotEmpty && _path.codeUnitAt(0) == _SLASH  ? _path.substring(1) : _path;
+      
+      final List<String> pathSegments = pathToSplit == "" ? const<String>[] : pathToSplit.split("/").map(Uri.encodeComponent).toList(growable: false);
+          
+      return (_path.codeUnitAt(0) == _SLASH ? "/" : "") + pathSegments.join("/");      
+    }
+    
+    Match _toMatch(final String uri) {
+      final Match m = _splitRe.firstMatch(uri);
+      return m;
+    }
+
+    Uri _fromMatch(final Match match) {
+      final Uri uri = new Uri(
+          scheme: _emptyIfNull(match[_COMPONENT_SCHEME]),
+          userInfo: _emptyIfNull(match[_COMPONENT_USER_INFO]),
+          host: _eitherOf(match[_COMPONENT_HOST], match[_COMPONENT_HOST_IPV6]),
+          port: _parseIntOrZero(match[_COMPONENT_PORT]),
+          path: _emptyIfNull(match[_COMPONENT_PATH]),
+          query: _emptyIfNull(match[_COMPONENT_QUERY_DATA]),
+          fragment: _emptyIfNull(match[_COMPONENT_FRAGMENT])
+          );
+    
+    return uri;      
+    }
+    
+    static String _emptyIfNull(String val) => val != null ? val : '';
+
+    static int _parseIntOrZero(String val) {
+      if (val != null && val != '') {
+        return int.parse(val);
+      } else {
+        return 0;
+      }
+    } 
+    
+    static String _eitherOf(String val1, String val2) {
+      if (val1 != null) return val1;
+      if (val2 != null) return val2;
+      return '';
+    }    
 }
