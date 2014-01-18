@@ -88,7 +88,8 @@ class URIBuilder {
     
     /**
      * Build a URI, using the supplied values in order to replace any URI template parameters. 
-     * Values are converted to String using their toString function
+     * Values are converted to String using their toString function.
+     * QueryParams are alphapetically sortet
      * 
      *     URIBuilder uribuilder = new URIBuilder.fromString("/test/{folder}/file.html");
      *     Uri uri = uribuilder.build(values: { "folder":"sub"});
