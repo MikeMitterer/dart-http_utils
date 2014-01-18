@@ -258,7 +258,7 @@ class URIBuilder {
       // Sort key to get the same result in Dart and JS
       final List<String> keys = _queryParams.keys.toList(growable: false)..sort((final String e1,final String e2) => e1.compareTo(e2));
       for(final String key in keys) {
-        print("Key: $key");
+        //print("Key: $key");
         if(encode) {
           queryParamsEncoded[Uri.encodeQueryComponent(key)] = Uri.encodeQueryComponent(_queryParams[key]);
         } else {
@@ -266,7 +266,7 @@ class URIBuilder {
         }
       }
    
-      print(queryParamsEncoded);
+      //print(queryParamsEncoded);
       return queryParamsEncoded;      
     }
     

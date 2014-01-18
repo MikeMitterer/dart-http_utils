@@ -24,6 +24,7 @@ Dart Documentation fur HTTPStatus is [here][7]
 http_utils on [PUB][8]
 
 ###History ###
+* 1.2.6 - Runs with Dart 1.1 + IntelliJ 13
 * 1.2.4 - Solve strange JS-Error (Issue 12123)
 * 1.2.2 - Removed some unnecessary "this" references in URIBuilder
 * 1.2.0 - Port of Response.Status and Response.Status.Family to Dart added

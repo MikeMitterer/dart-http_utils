@@ -9,8 +9,6 @@ testURIBuilder() {
             final String url = "http://www.google.com:8080?age=99&name=UNKnown#subsection";
             final Uri uri = Uri.parse(url);
             expect(uri.queryParameters["age"], "99");
-
-            final Uri uriTest = Uri.parse(url);
         });
 
         test('> Simple URL', () {
@@ -27,10 +25,12 @@ testURIBuilder() {
 
             uribuilder.setParameter("age", "99");
             uribuilder.setParameter("name", "UNKnown");
-            expect(uribuilder.build().toString(), "http://$host:8080?name=UNKnown&age=99#subsection");
+
+            // Paramas should be sorted
+            expect(uribuilder.build().toString(), "http://$host:8080?age=99&name=UNKnown#subsection");
 
             uribuilder.setParameter("name", "Mike");
-            expect(uribuilder.build().toString(), "http://$host:8080?name=Mike&age=99#subsection");
+            expect(uribuilder.build().toString(), "http://$host:8080?age=99&name=Mike#subsection");
         });
 
         test('> Generate from String', () {
