@@ -95,7 +95,7 @@ class URIBuilder {
      *     Uri uri = uribuilder.build(values: { "folder":"sub"});
      *     expect(uri.path,"/test/sub/file.html");
      */
-    Uri build({final Map<String,dynamic> values: const {},final bool encode: true}) {
+    Uri build({final Map<String,dynamic> values: const {},final bool encode: true }) {
       if(values.length > 0) { _replacePathWithValues(values); }
       final Uri uri = new Uri(
           scheme: _scheme,
@@ -110,7 +110,7 @@ class URIBuilder {
           
           fragment: _fragment
           );
-    
+
     return uri;
     /*
     if(encode == false) {
@@ -256,17 +256,19 @@ class URIBuilder {
       final Map<String,String> queryParamsEncoded = new Map<String,String>();
       
       // Sort key to get the same result in Dart and JS
-      final List<String> keys = _queryParams.keys.toList(growable: false)..sort((final String e1,final String e2) => e1.compareTo(e2));
+      final List<String> keys = _queryParams.keys.toList(growable: false)
+          ..sort((final String e1,final String e2) => e1.compareTo(e2));
+
       for(final String key in keys) {
-        //print("Key: $key");
+        // print("Key: $key");
         if(encode) {
           queryParamsEncoded[Uri.encodeQueryComponent(key)] = Uri.encodeQueryComponent(_queryParams[key]);
         } else {
           queryParamsEncoded[key] = _queryParams[key];
         }
       }
-   
-      //print(queryParamsEncoded);
+
+      // print(queryParamsEncoded);
       return queryParamsEncoded;      
     }
     

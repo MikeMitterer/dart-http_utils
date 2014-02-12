@@ -100,9 +100,18 @@ testURIBuilder() {
             Uri uri2 = resturi.build(values: {
                 "id":"10"
             });
-            expect(uri2.path, "/test/name/10");
-
+            expect("/test/name/10",uri2.path);
         });
+
+        test('> Uri (sorted)', () {
+            final String url = "http://www.google.com:8080?name=UNKnown&age=99#subsection";
+            final URIBuilder uribuilder = new URIBuilder.fromString(url);
+
+            final Uri uri = uribuilder.build();
+            print(uri.toString());
+            expect(uri.toString(),"http://www.google.com:8080?age=99&name=UNKnown#subsection");
+        });
+
     });
 }
 

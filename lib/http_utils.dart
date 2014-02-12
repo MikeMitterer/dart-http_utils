@@ -1,6 +1,7 @@
 library httputils;
 
-import 'dart:core'; 
+import 'dart:core';
+import "dart:collection";
 
 part "src/HttpStatus.dart";
 part "src/ResponseStatus.dart";
