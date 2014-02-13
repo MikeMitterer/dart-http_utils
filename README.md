@@ -24,6 +24,7 @@ Dart Documentation fur HTTPStatus is [here][7]
 http_utils on [PUB][8]
 
 ###History ###
+* 1.2.9 - DateUtils added, is more or less a rfc822 formater / parser
 * 1.2.8 - Test added which shows sorted query params
 * 1.2.6 - Runs with Dart 1.1 + IntelliJ 13
 * 1.2.4 - Solve strange JS-Error (Issue 12123)
