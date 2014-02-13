@@ -1,5 +1,5 @@
 name: http_utils
-version: 1.2.9
+version: 1.2.10
 author: Mike Mitterer  <office@mikemitterer.at>
 description: Provides some HTTP related classes portet from Apache HTTP client lib
 homepage: https://github.com/MikeMitterer/dart-http_utils

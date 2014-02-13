@@ -19,6 +19,7 @@ class DateUtils {
      * zz   = Wed, 02 Oct 2002 13:00:00 +00:00
      * zzz  = Wed, 02 Oct 2002 13:00:00 +00:00
      */
+    final DateFormat rfc822PatternWithoutTZ = new DateFormat("EEE, dd MMM yyyy HH:mm:ss","en_US");
     final DateFormat rfc822Formatter   = new DateFormat("EEE, dd MMM yyyy HH:mm:ss Z","en_US");
 
     /**
@@ -56,7 +57,7 @@ class DateUtils {
      * @return The parsed Date object.
      * @throws ParseException If the date string could not be parsed.
      */
-    DateTime parseRfc822Date(String dateString) {
+    DateTime parseRfc822Date(final String dateString) {
         return rfc822Formatter.parse(dateString);
     }
 
@@ -67,6 +68,24 @@ class DateUtils {
      * @return The RFC 822 string representing the specified date.
      */
     String formatRfc822Date(DateTime date) {
-        return rfc822Formatter.format(date);
+        final String withoutTZ = rfc822PatternWithoutTZ.format(date);
+        final Duration duration = date.timeZoneOffset;
+
+        String twoDigits(final int n) {
+            if (n >= 10) return "${n}";
+            return "0${n}";
+        }
+
+        String twoDigitsWithSign(final int n) {
+            if (n >= 10) return "+${n}";
+            else if(n >= 0) return "+0${n}";
+            else if(n > -10) return "-0${n}";
+            else return "-${n}";
+        }
+
+        final String h = twoDigitsWithSign(duration.inHours);
+        final String m = twoDigits(duration.inHours * 60 - duration.inMinutes);
+
+        return "$withoutTZ $h$m";
     }
 }

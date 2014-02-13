@@ -9,6 +9,7 @@ import 'package:unittest/unittest.dart';
 import 'package:unittest/html_enhanced_config.dart';
 
 import 'package:http_utils/http_utils.dart';
+import "package:intl/intl.dart" show DateFormat;
 
 part 'src/httpstatus_test.dart';
 part 'src/responsestatus_test.dart';
