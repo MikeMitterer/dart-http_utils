@@ -11,6 +11,7 @@ testURIBuilder() {
             expect(uri.queryParameters["age"], "99");
         });
 
+        /// http://www.w3schools.com/tags/ref_urlencode.asp#encodingresult
         test('> Simple URL', () {
             final URIBuilder uribuilder = new URIBuilder();
 
@@ -31,6 +32,9 @@ testURIBuilder() {
 
             uribuilder.setParameter("name", "Mike");
             expect(uribuilder.build().toString(), "http://$host:8080?age=99&name=Mike#subsection");
+
+            uribuilder.setParameter("name", "Mi ke");
+            expect(uribuilder.build(encode: false).toString(), "http://$host:8080?age=99&name=Mi+ke#subsection");
         });
 
         test('> Generate from String', () {

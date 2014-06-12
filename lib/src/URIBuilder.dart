@@ -23,6 +23,7 @@ part of httputils;
 
 
 
+/// http://www.w3schools.com/tags/ref_urlencode.asp#encodingresult
 class URIBuilder {
     static const int _SLASH = 0x2F;
     
