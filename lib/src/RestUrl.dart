@@ -29,15 +29,15 @@ abstract class AbstractRestUrl {
   
   String _toString(final String path,final Map<String,dynamic> params) {
     final StringBuffer uri = new StringBuffer();
-    
+
     if(scheme.isNotEmpty) {
       uri.write("$scheme://");
     }
-    
+
     if(authority.isNotEmpty && authority.length > 1) {
       uri.write("$authority");
-    }    
-    
+    }
+
     if(pathPrefix.isNotEmpty) {
       uri.write("$pathPrefix");
     }
@@ -52,12 +52,13 @@ abstract class AbstractRestUrl {
 
     if(params.isNotEmpty) {
       uri.write("?");
-      
+
       final List<String> kvPair = new List<String>();
       params.forEach((final String key,final dynamic value) => kvPair.add("$key=$value"));
+
       uri.write(kvPair.join("&"));
     }
-    
+
     return uri.toString();
   }
 }

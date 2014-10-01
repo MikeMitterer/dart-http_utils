@@ -5,14 +5,11 @@ class RestUrl8081 extends RestUrl {
   const RestUrl8081([final String scheme = "http"]) : super(scheme);
 }
 
-class RestBuilderForChat extends RestBuilder {
-  const RestBuilderForChat() : super("ws","","/chat");
-}
-
 class RestLocalFile extends RestBuilder {
-  String get port => ""; 
+  String get port => "";
   String get host => "";
   const RestLocalFile() : super("","","data",".json");
+  URIBuilder call([final String path = "" ,final Map<String,dynamic> params = const {}]) => new URIBuilder.forFile(toString(path,params));
 }
 
 testRestUrl() {
@@ -68,16 +65,11 @@ testRestUrl() {
         expect(resturl(),"https://localhost:8081/api/v1");
         });
       
-      test(' -> Chat URL', () {
-        const RestBuilder resturl = const RestBuilderForChat();
-        expect(resturl().setParameter("name","Mike").build().toString(),"ws://localhost:8080/chat?name=Mike");
-        });  
-      
       test(' -> Loal file', () {
         const RestBuilder resturl = const RestLocalFile();
         expect(resturl("/colors").build().toString(),"data/colors.json");
-        });       
-    
+        });
+
      }); // group RestUrl change default values
     
     group('RestUri', () {
@@ -99,8 +91,11 @@ testRestUrl() {
       
       test(' -> with template', () {
         const RestUri resturl = const RestUri();
-        expect(resturl("/name/{name}").toString(),"http://localhost:8080/api/v1/name/{name}");
-        });       
+        expect(resturl("/name/{name}").toString(),"http://localhost:8080/api/v1/name/%7Bname%7D");
+
+        // Funkt nicht!!!!
+        //expect(resturl("/name/{name}",{ "name" : "Mike" }).toString(),"http://localhost:8080/api/v1/name/Mike");
+        });
       
       test(' -> with params', () {
         const RestUri resturl = const RestUri();
