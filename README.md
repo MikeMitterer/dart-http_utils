@@ -24,6 +24,7 @@ Dart Documentation fur HTTPStatus is [here][7]
 http_utils on [PUB][8]
 
 ###History ###
+* 1.3.2 - Bug: _digestURI create a unmodifiable map. setParameter was not possible
 * 1.3.1 - Made it compatible with Dart SDK 1.6
 * 1.2.10 - DateUtils added, is more or less a rfc822 formater / parser
 * 1.2.8 - Test added which shows sorted query params
