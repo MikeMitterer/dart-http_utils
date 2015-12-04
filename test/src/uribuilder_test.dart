@@ -1,6 +1,10 @@
-part of test;
+import 'dart:core';
 
-testURIBuilder() {
+import 'package:test/test.dart';
+
+import 'package:http_utils/http_utils.dart';
+
+main() {
 
     group('URI Builder', () {
         final String host = "www.google.com";
@@ -64,12 +68,10 @@ testURIBuilder() {
             expect(uribuilder.build().path, "/");
             expect(uribuilder.build().queryParameters["age"], ">20");
             expect(Uri.decodeQueryComponent(uribuilder.build().queryParameters["age"]), ">20");
-            expect(uribuilder.decode().queryParameters["age"], ">20");
 
             uribuilder = new URIBuilder.fromString("http://${host}/?age=%3E20");
             expect(uribuilder.build().queryParameters["age"], ">20");
             expect(Uri.decodeQueryComponent(uribuilder.build().queryParameters["age"]), ">20");
-            expect(uribuilder.decode().queryParameters["age"], ">20");
         });
 
         test('> Path only', () {
@@ -81,12 +83,10 @@ testURIBuilder() {
             expect(uribuilder.build().path, "/");
             expect(uribuilder.build().queryParameters["age"], ">20");
             expect(Uri.decodeQueryComponent(uribuilder.build().queryParameters["age"]), ">20");
-            expect(uribuilder.decode().queryParameters["age"], ">20");
 
             uribuilder = new URIBuilder.fromString("?age=%3E20");
             expect(uribuilder.build().queryParameters["age"], ">20");
             expect(Uri.decodeQueryComponent(uribuilder.build().queryParameters["age"]), ">20");
-            expect(uribuilder.decode().queryParameters["age"], ">20");
 
             expect('', uribuilder.build().host);
         });
@@ -115,15 +115,8 @@ testURIBuilder() {
             final URIBuilder uribuilder = new URIBuilder.fromString(url);
 
             final Uri uri = uribuilder.build();
-            print(uri.toString());
             expect(uri.toString(),"http://www.google.com:8080?age=99&name=UNKnown#subsection");
         });
 
     });
 }
-
-//------------------------------------------------------------------------------------------------
-// Helper
-//------------------------------------------------------------------------------------------------
-
-

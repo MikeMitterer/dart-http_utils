@@ -1,7 +1,6 @@
 library httputils;
 
 import 'dart:core';
-import "dart:collection";
 import "package:intl/intl.dart" show DateFormat;
 
 part "src/HttpStatus.dart";

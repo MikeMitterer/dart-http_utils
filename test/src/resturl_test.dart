@@ -1,4 +1,8 @@
-part of test;
+import 'dart:core';
+
+import 'package:test/test.dart';
+
+import 'package:http_utils/http_utils.dart';
 
 class RestUrl8081 extends RestUrl {
   String get port => "8081"; 
@@ -12,7 +16,7 @@ class RestLocalFile extends RestBuilder {
   URIBuilder call([final String path = "" ,final Map<String,dynamic> params = const {}]) => new URIBuilder.forFile(toString(path,params));
 }
 
-testRestUrl() {
+main() {
   group('RestUrl', () { 
     group('RestUrl - basics', () {
   

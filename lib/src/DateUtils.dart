@@ -1,8 +1,5 @@
 part of httputils;
 
-/**
- * Created by mikemitterer on 04.12.13.
- */
 class DateUtils {
 
     /**

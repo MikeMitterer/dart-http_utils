@@ -4,8 +4,12 @@ author: Mike Mitterer  <office@mikemitterer.at>
 description: Provides some HTTP related classes portet from Apache HTTP client lib
 homepage: https://github.com/MikeMitterer/dart-http_utils
 
+environment:
+  sdk: '>=1.12.0 <2.0.0'
+
 dev_dependencies:
+  grinder: any
   browser: any
-  unittest: any
+  test: any
   validate: any
   intl: any

@@ -98,8 +98,7 @@ class URIBuilder {
      *     Uri uri = uribuilder.build(values: { "folder":"sub"});
      *     expect(uri.path,"/test/sub/file.html");
      */
-    Uri build({final Map<String, dynamic> values: const {
-    }, final bool encode: false }) {
+    Uri build({final Map<String, dynamic> values: const {}, final bool encode: false }) {
         if (values.length > 0) {
             _replacePathWithValues(values);
         }
@@ -120,8 +119,8 @@ class URIBuilder {
         return uri;
     }
 
-    Uri decode() {
-        return Uri.parse(Uri.decodeFull(build().toString()));
+    String decode({final Map<String, dynamic> values: const {}}) {
+        return Uri.decodeFull(build(values: values).toString());
     }
 
     /// checks if the path is empty
@@ -330,16 +329,16 @@ class URIBuilder {
         return uri;
     }
 
-    static String _emptyIfNull(String val) => val != null ? val : '';
+    // static String _emptyIfNull(String val) => val != null ? val : '';
 
-    static int _parseIntOrZero(String val) {
-        if (val != null && val != '') {
-            return int.parse(val);
-        }
-        else {
-            return 0;
-        }
-    }
+//    static int _parseIntOrZero(String val) {
+//        if (val != null && val != '') {
+//            return int.parse(val);
+//        }
+//        else {
+//            return 0;
+//        }
+//    }
 
     static int _parseIntOrNull(String val) {
         if (val != null && val != '') {

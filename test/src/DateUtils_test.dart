@@ -1,10 +1,11 @@
-part of test;
+import 'dart:core';
 
-/**
- *
- */
+import 'package:test/test.dart';
 
-testDateUtils() {
+import 'package:http_utils/http_utils.dart';
+import 'package:intl/intl.dart';
+
+main() {
     final String dateIso8601 = "2013-12-04T12:01:33+01:00";
     final List<String> date822 = ["Wed, 02 Oct 2002 08:00:00 EST", "Wed, 02 Oct 2002 13:00:00 GMT", "Wed, 02 Oct 2002 15:00:00 +0200", "Wed, 02 Oct 2002 15:00:00 +0230"];
 
@@ -18,9 +19,9 @@ testDateUtils() {
             expect(du.parseIso8601Date(dateIso8601).timeZoneOffset.inHours, 1);
         }); // end of 'testParseIso8601Date' test
 
-        skip_test('> testFormatIso8601Date', () {
-            final DateTime dt = du.parseIso8601Date(dateIso8601);
-            // expect(du.formatIso8601Date(dt),dateIso8601);
+        test('> testFormatIso8601Date', () {
+             // final DateTime dt = du.parseIso8601Date(dateIso8601);
+             // expect(du.formatIso8601Date(dt),dateIso8601);
 
             // Produziert:
             // DateUtils > testFormatIso8601Date. Test failed: Caught UnimplementedError
@@ -28,7 +29,7 @@ testDateUtils() {
             // package:intl/src/date_format_field.dart 178:41    _DateFormatPatternField.formatField
             // package:intl/src/date_format_field.dart 112:25    _DateFormatPatternField.format
 
-        }); // end of 'testFormatIso8601Date' test
+        },skip: "Fraglich ob die Implementierung notwendig ist - eigentlich nicht..."); // end of 'testFormatIso8601Date' test
 
         test('> testParseRfc822Date', () {
             expect(du.parseRfc822Date(date822[0]).year, 2002);
@@ -54,13 +55,15 @@ testDateUtils() {
 
         }); // end of 'testParseRfc822Date' test
 
-        /// Issue: https://code.google.com/p/dart/issues/detail?id=16801
-        skip_test('> parseForIssueReport', () {
-            final DateFormat rfc822Formatter = new DateFormat("EEE, dd MMM yyyy HH:mm:ss Z","en_US");
-            final DateTime dt = rfc822Formatter.parse("Wed, 02 Oct 2002 15:00:00 +0230");
+        // Issue: https://code.google.com/p/dart/issues/detail?id=16801
+        // + https://github.com/dart-lang/intl/issues/34
+        // DateFormat cannot parse time zones!
+        test('> parseForIssueReport', () {
+             final DateFormat rfc822Formatter = new DateFormat("EEE, dd MMM yyyy HH:mm:ss Z","en_US");
+             final DateTime dt = rfc822Formatter.parse("Wed, 02 Oct 2002 15:00:00 +0230");
 
-            expect(dt.timeZoneOffset.inMinutes, 150);
-        }); // end of 'parseForIssueReport' test
+             expect(dt.timeZoneOffset.inMinutes, 150);
+         }, skip: "DateFormat cannot parse time zones!"); // end of 'parseForIssueReport' test
 
         test('> formatRfc822Date', () {
             final DateTime dt = du.parseRfc822Date(date822[2]);
@@ -75,7 +78,3 @@ testDateUtils() {
     });
     // end 'DateUtils' group
 }
-
-//------------------------------------------------------------------------------------------------
-// Helper
-//------------------------------------------------------------------------------------------------

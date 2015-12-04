@@ -1,6 +1,10 @@
-part of test;
+import 'dart:core';
 
-testResponseStatus() {
+import 'package:test/test.dart';
+
+import 'package:http_utils/http_utils.dart';
+
+main() {
 
   group('ResponseStatus', () {
 
@@ -63,7 +67,3 @@ testResponseStatus() {
     });
   }); // group: ResponseStatusFamily
 }
-
-//------------------------------------------------------------------------------------------------
-// Helper
-//------------------------------------------------------------------------------------------------

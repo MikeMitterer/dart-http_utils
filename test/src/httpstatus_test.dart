@@ -1,6 +1,10 @@
-part of test;
+import 'dart:core';
 
-testHTTPStatus() {
+import 'package:test/test.dart';
+
+import 'package:http_utils/http_utils.dart';
+
+main() {
 
   group('HTTP Status', () {
 
@@ -10,9 +14,5 @@ testHTTPStatus() {
       });
   });
 }
-
-//------------------------------------------------------------------------------------------------
-// Helper
-//------------------------------------------------------------------------------------------------
 
 
