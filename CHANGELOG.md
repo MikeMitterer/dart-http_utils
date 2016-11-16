@@ -1,6 +1,11 @@
 # Change Log for http_utils
 Provides some HTTP related classes portet from Apache HTTP client lib
 
+## [v1.4.1](http://github.com/mikemitterer/dart-http_utils/compare/v1.4.0...v1.4.1) - 2016-11-16
+
+### Docs
+* Strong-Mode support [a27801b](https://github.com/mikemitterer/dart-http_utils/commit/a27801b95d0f2878dea619ae85a9960e205cd42c)
+
 ## [v1.4.0](http://github.com/mikemitterer/dart-http_utils/compare/v1.3.2...v1.4.0) - 2015-12-04
 
 ### Docs
