@@ -42,7 +42,7 @@ class URIBuilder {
         // digits, dashes, dots, percent
         // escapes, and unicode characters.
         '|'
-        // TODO(ajohnsen): Only allow a max number of parts?
+        // TODO.off(ajohnsen): Only allow a max number of parts?
         r'\[([A-Fa-f0-9:.]*)\])'
         // IPv6 host - restrict to hex,
         // dot and colon.
