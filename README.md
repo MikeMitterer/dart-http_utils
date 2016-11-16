@@ -5,41 +5,27 @@ Over time this should become a collection of useful HTTP-Tools...
 
 If the documenation links don't not work - pls. got to [GitHub][9] - there it they'll work
 
-### ResponseStatus ###
+### ResponseStatus 
 Commonly used status codes defined by HTTP<br>
 Dart Documentation for ResponseStatus [here][10]
 
-### URIBuilder ###
+### URIBuilder 
 Helps you to compose URIs.<br>
 Dart Documentation for URIBuilder [here][6]
  
 For further documentation please refere to the [Unit-Tests][1].<br>
 ApiDoc for Apaches [URIBuilder][3]
 
-### HTTPStatus ###
+### HTTPStatus 
 Brings status-code to a more readable form.
 Dart Documentation fur HTTPStatus is [here][7] 
 ([Unit-Tests][2])
 
 http_utils on [PUB][8]
 
-###History ###
-* 1.3.2 - Bug: _digestURI create a unmodifiable map. setParameter was not possible
-* 1.3.1 - Made it compatible with Dart SDK 1.6
-* 1.2.10 - DateUtils added, is more or less a rfc822 formater / parser
-* 1.2.8 - Test added which shows sorted query params
-* 1.2.6 - Runs with Dart 1.1 + IntelliJ 13
-* 1.2.4 - Solve strange JS-Error (Issue 12123)
-* 1.2.2 - Removed some unnecessary "this" references in URIBuilder
-* 1.2.0 - Port of Response.Status and Response.Status.Family to Dart added
-* 1.1.1 - Its possible to generate a local-file urls (relative path)
-* 1.1.1 - Test for WebSocket-Scheme added
-* 1.1.0 - RestUrl provides you with some default settings for your server and generats Urls, Uris or URIBuilder
-* 1.0.7 - "build" builds the Uri now with the supplied values. It replaces any URI template parameter with the values "toString" method
+### License
 
-###License###
-
-    Copyright 2013 Michael Mitterer, IT-Consulting and Development Limited,
+    Copyright 2016 Michael Mitterer, IT-Consulting and Development Limited,
     Austrian Branch
 
     Licensed under the Apache License, Version 2.0 (the "License");
