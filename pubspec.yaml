@@ -7,9 +7,12 @@ homepage: https://github.com/MikeMitterer/dart-http_utils
 environment:
   sdk: '>=1.12.0 <2.0.0'
 
+dependencies:
+
+  intl: '>=0.15.2 <1.0.0'
+
 dev_dependencies:
   grinder: any
   browser: any
   test: any
   validate: any
-  intl: any

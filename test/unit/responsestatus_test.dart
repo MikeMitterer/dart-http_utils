@@ -24,7 +24,7 @@ main() {
       });  
     
     test('> valueOf with Exception', () {
-      final Function callback = expectAsync((final StateError e) => expect(true,isTrue));
+      final Function callback = expectAsync1((final StateError e) => expect(true,isTrue));
       
       try {
         ResponseStatus.valueOf("HudriWudri");
@@ -56,7 +56,7 @@ main() {
       });  
     
     test('> valueOf with Exception', () {
-      final Function callback = expectAsync((final StateError e) => expect(true,isTrue));
+      final Function callback = expectAsync1((final StateError e) => expect(true,isTrue));
       
       try {
         ResponseStatusFamily.valueOf("HudriWudri");
