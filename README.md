@@ -3,7 +3,7 @@ Over time this should become a collection of useful HTTP-Tools...
 * [API Reference][4]
 * [Issues][5]
 
-If the documenation links don't not work - pls. got to [GitHub][9] - there it they'll work
+If the documentation links don't not work - pls. got to [GitHub][9] - there it they'll work
 
 ### ResponseStatus 
 Commonly used status codes defined by HTTP<br>
@@ -25,7 +25,7 @@ http_utils on [PUB][8]
 
 ### License
 
-    Copyright 2016 Michael Mitterer, IT-Consulting and Development Limited,
+    Copyright 2017 Michael Mitterer, IT-Consulting and Development Limited,
     Austrian Branch
 
     Licensed under the Apache License, Version 2.0 (the "License");
