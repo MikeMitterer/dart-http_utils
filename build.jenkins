@@ -13,10 +13,17 @@ pipeline {
                 }
             }
         }
+        stage('Analyze') {
+            steps {
+                ansiColor('xterm') {
+                    sh 'grind analyze'
+                }
+            }
+        }
         stage('Test') {
             steps {
                 ansiColor('xterm') {
-                    sh 'grind test'
+                    sh 'grind test-unit'
                 }
             }
         }

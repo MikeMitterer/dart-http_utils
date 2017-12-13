@@ -3,12 +3,11 @@ import 'package:grinder/grinder.dart';
 main(final List<String> args) => grind(args);
 
 @Task()
-@Depends(testUnit)
+@Depends(analyze, testUnit)
 test() {
 }
 
 @Task()
-@Depends(analyze)
 testUnit() {
     new TestRunner().testAsync(files: "test");
     // new TestRunner().testAsync(files: "test",platformSelector: "content-shell");
