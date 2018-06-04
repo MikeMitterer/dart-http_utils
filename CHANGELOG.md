@@ -1,7 +1,12 @@
 # Change Log for http_utils
 Provides some HTTP related classes portet from Apache HTTP client lib
 
-## [Unreleased](http://github.com/mikemitterer/dart-http_utils/compare/v1.5...HEAD)
+## [Unreleased](http://github.com/mikemitterer/dart-http_utils/compare/v1.6...HEAD)
+
+### Feature
+* Dart 2.x ready [a49e13c](https://github.com/mikemitterer/dart-http_utils/commit/a49e13c9fdd81531d82febb99ab5793991714fe2)
+
+## [v1.6](http://github.com/mikemitterer/dart-http_utils/compare/v1.5...v1.6) - 2017-12-13
 
 ### Refactor
 * Preparation for Jenkins, versions constraints [53e6002](https://github.com/mikemitterer/dart-http_utils/commit/53e600246e2b3f30883791a51a4f82a370f06fb1)
