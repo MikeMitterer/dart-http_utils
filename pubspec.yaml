@@ -12,7 +12,11 @@ dependencies:
   intl: '>=0.15.2 <1.0.0'
 
 dev_dependencies:
-  grinder: any
-  browser: any
   test: any
+
   validate: any
+
+  build_runner: ^0.8.0
+  build_test: ^0.10.0
+  build_web_compilers: ^0.4.0
+
