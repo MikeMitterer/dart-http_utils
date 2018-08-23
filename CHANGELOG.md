@@ -4,6 +4,7 @@ Provides some HTTP related classes portet from Apache HTTP client lib
 ## [Unreleased](http://github.com/mikemitterer/dart-http_utils/compare/v1.6...HEAD)
 
 ### Feature
+* More Dart 2.x ready [6847d2a](https://github.com/mikemitterer/dart-http_utils/commit/6847d2a588578b082070bdfd4a7ca30b3543b2b8)
 * Dart 2.x ready [a49e13c](https://github.com/mikemitterer/dart-http_utils/commit/a49e13c9fdd81531d82febb99ab5793991714fe2)
 
 ## [v1.6](http://github.com/mikemitterer/dart-http_utils/compare/v1.5...v1.6) - 2017-12-13
