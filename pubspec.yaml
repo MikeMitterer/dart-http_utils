@@ -5,18 +5,18 @@ description: Provides some HTTP related classes portet from Apache HTTP client l
 homepage: https://github.com/MikeMitterer/dart-http_utils
 
 environment:
-  sdk: '>=1.12.0 <2.0.0'
+  sdk: ">=2.0.0 <3.0.0"
 
 dependencies:
 
-  intl: '>=0.15.2 <1.0.0'
+  intl: '>=0.15.7 <1.0.0'
 
 dev_dependencies:
   test: any
 
   validate: any
 
-  build_runner: ^0.8.0
-  build_test: ^0.10.0
-  build_web_compilers: ^0.4.0
+  build_runner: any
+  build_test: any
+  build_web_compilers: any
 
